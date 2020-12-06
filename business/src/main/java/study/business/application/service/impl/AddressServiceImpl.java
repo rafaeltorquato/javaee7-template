@@ -1,9 +1,9 @@
 package study.business.application.service.impl;
 
-import study.components.interceptor.Logged;
 import study.business.application.service.AddressService;
 import study.business.domain.model.Address;
 import study.business.domain.model.AddressDao;
+import study.components.interceptor.Logged;
 
 import javax.annotation.Resource;
 import javax.ejb.EJB;

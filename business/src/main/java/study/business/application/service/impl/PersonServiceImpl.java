@@ -1,6 +1,6 @@
 package study.business.application.service.impl;
 
-import study.business.application.evt.PersonDeletedEvent;
+import study.business.application.event.PersonDeletedEvent;
 import study.business.application.service.PersonService;
 import study.business.domain.model.Person;
 import study.business.domain.model.PersonDao;

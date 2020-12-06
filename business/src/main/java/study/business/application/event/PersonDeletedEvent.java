@@ -1,4 +1,4 @@
-package study.business.application.evt;
+package study.business.application.event;
 
 import java.io.Serializable;
 

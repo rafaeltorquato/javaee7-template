@@ -5,7 +5,8 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.Collection;
 
 /**
- *   only with String and Collection
+ *   Works only with String and Collection.
+ *   Return true for null values.
  */
 public class NotEmptyValidator implements ConstraintValidator<NotEmpty, Object> {
 
@@ -15,7 +16,7 @@ public class NotEmptyValidator implements ConstraintValidator<NotEmpty, Object> 
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
-        if (value == null) return false;
+        if (value == null) return true;
 
         if (value instanceof String) {
             return !((String) value).trim().isEmpty();

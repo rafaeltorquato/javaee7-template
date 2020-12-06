@@ -1,6 +1,6 @@
 package study.business.application.service.impl;
 
-import study.business.application.misc.Logged;
+import study.components.interceptor.Logged;
 import study.business.application.service.AddressService;
 import study.business.domain.model.Address;
 import study.business.domain.model.AddressDao;

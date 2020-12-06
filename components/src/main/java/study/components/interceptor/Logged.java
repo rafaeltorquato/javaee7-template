@@ -1,4 +1,4 @@
-package study.business.application.misc;
+package study.components.interceptor;
 
 import javax.interceptor.InterceptorBinding;
 import java.lang.annotation.*;

@@ -2,10 +2,12 @@ package study.components.impl;
 
 import study.components.DateTimeFactory;
 
-import javax.inject.Singleton;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Default;
 import java.util.Date;
 
-@Singleton
+@Default
+@ApplicationScoped
 public class DateTimeFactoryImpl implements DateTimeFactory {
 
     @Override

@@ -1,7 +1,6 @@
 package study.domain.model;
 
-import study.converter.PersonNameConverter;
-import study.validation.NotEmpty;
+import study.domain.converter.PersonNameConverter;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -57,4 +56,67 @@ public class Person {
 
     //JavaBean specification
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public PersonName getName() {
+        return name;
+    }
+
+    public void setName(PersonName name) {
+        this.name = name;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Date getRegisterDateTime() {
+        return registerDateTime;
+    }
+
+    public void setRegisterDateTime(Date registerDateTime) {
+        this.registerDateTime = registerDateTime;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    public Set<Phone> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(Set<Phone> phones) {
+        this.phones = phones;
+    }
+
+    public Set<Relationship> getRelationships() {
+        return relationships;
+    }
+
+    public void setRelationships(Set<Relationship> relationships) {
+        this.relationships = relationships;
+    }
+
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
+    }
 }

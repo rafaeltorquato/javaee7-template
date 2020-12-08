@@ -1,6 +1,6 @@
 package study.components.impl;
 
-import study.components.ChoosenDateTimeFactory;
+import study.components.ChosenDateTimeFactory;
 import study.components.DateTimeFactory;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -21,7 +21,7 @@ public class DateTimeFactoryProducer {
     private DateTimeFactoryCalendarImpl dateTimeFactoryCalendar;
 
     @Produces
-    @ChoosenDateTimeFactory
+    @ChosenDateTimeFactory
     @RequestScoped
     public DateTimeFactory getDateTimeFactory() {
         //if
@@ -30,7 +30,7 @@ public class DateTimeFactoryProducer {
         return dateTimeFactoryCalendar;
     }
 
-    public void close(@Disposes @ChoosenDateTimeFactory DateTimeFactory dateTimeFactory) {
+    public void close(@Disposes @ChosenDateTimeFactory DateTimeFactory dateTimeFactory) {
         logger.info("Disposed " + dateTimeFactory.getClass().getName() + " bean.");
     }
 

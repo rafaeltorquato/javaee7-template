@@ -10,4 +10,6 @@ public interface EmailService {
 
     Future<Boolean> sendAsync(String email, String subject, String message);
 
+    void queue(String email, String subject, String message);
+
 }

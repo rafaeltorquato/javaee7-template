@@ -9,9 +9,10 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>web</module>
-        <module>components</module>
+        <module>component</module>
         <module>business</module>
         <module>ear</module>
+        <module>client</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -34,7 +35,7 @@
             <!--Modules-->
             <dependency>
                 <groupId>study</groupId>
-                <artifactId>components</artifactId>
+                <artifactId>component</artifactId>
                 <version>1.0-SNAPSHOT</version>
                 <scope>provided</scope>
             </dependency>

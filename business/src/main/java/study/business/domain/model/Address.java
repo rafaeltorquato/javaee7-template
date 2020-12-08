@@ -31,4 +31,12 @@ public class Address {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 }

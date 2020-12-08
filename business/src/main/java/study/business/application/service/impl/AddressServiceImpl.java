@@ -24,11 +24,14 @@ public class AddressServiceImpl implements AddressService {
     private AddressDao addressDao;
 
     @Override
-    public Address save(Address address) {
+    public Address newAddress(NewAddressCommand command) {
         try {
             tx.begin();
+            final Address address = new Address();
+            address.setValue(command.getValue());
             addressDao.save(address);
             tx.commit();
+            return address;
         } catch (Exception e) {
             try {
                 tx.rollback();
@@ -36,7 +39,7 @@ public class AddressServiceImpl implements AddressService {
                 throw new RuntimeException(systemException);
             }
         }
-        return address;
+        return null;
     }
 
     @Override

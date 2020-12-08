@@ -28,7 +28,7 @@
         <!--Libraries-->
         <dependency>
             <groupId>study</groupId>
-            <artifactId>components</artifactId>
+            <artifactId>component</artifactId>
             <scope>compile</scope>
         </dependency>
     </dependencies>

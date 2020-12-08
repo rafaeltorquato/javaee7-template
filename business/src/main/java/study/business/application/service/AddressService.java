@@ -7,8 +7,21 @@ import javax.ejb.Local;
 @Local
 public interface AddressService {
 
-    Address save(Address address);
+    Address newAddress(NewAddressCommand command);
 
     void delete(Long id);
+
+
+    class NewAddressCommand {
+        private String value;
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+    }
 
 }

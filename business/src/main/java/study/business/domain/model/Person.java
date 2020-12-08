@@ -1,6 +1,7 @@
 package study.business.domain.model;
 
 import study.business.domain.converter.PersonNameConverter;
+import study.components.validation.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -21,6 +22,9 @@ public class Person {
     @Column(length = 150, nullable = false)
     @Convert(converter = PersonNameConverter.class)
     private PersonName name;
+    @NotEmpty
+    @Column(length = 200, nullable = false)
+    private String email;
     @NotNull
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
@@ -56,6 +60,7 @@ public class Person {
 
     //JavaBean specification
 
+
     public Long getId() {
         return id;
     }
@@ -70,6 +75,14 @@ public class Person {
 
     public void setName(PersonName name) {
         this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Date getBirthDate() {

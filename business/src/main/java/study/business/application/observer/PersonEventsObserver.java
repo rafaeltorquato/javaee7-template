@@ -23,7 +23,11 @@ public class PersonEventsObserver {
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void whenDeleted(@Observes(during = TransactionPhase.AFTER_COMPLETION) PersonDeletedEvent event) {
         Person person = personDao.findById(event.getId());
-        //TODO Send Goodbye email message
+        emailService.send(
+                person.getEmail(),
+                "Goodbye",
+                "You was deleted!"
+        );
     }
 
 }

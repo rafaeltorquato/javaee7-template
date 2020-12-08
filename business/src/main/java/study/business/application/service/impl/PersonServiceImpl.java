@@ -4,6 +4,7 @@ import study.business.application.event.PersonDeletedEvent;
 import study.business.application.service.PersonService;
 import study.business.domain.model.Person;
 import study.business.domain.model.PersonDao;
+import study.business.domain.model.PersonName;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -23,14 +24,20 @@ public class PersonServiceImpl implements PersonService {
     private Event<PersonDeletedEvent> personDeletedEvent;
 
     @Override
-    public Person newPerson(Person person) {
+    public Person newPerson(NewPersonCommand command) {
+        final Person person = new Person();
+        setPerson(command, person);
         this.personDao.save(person);
         return person;
     }
 
     @Override
-    public Person editPerson(Person person) {
-        return null;
+    public Person editPerson(EditPersonCommand command) {
+        final Person person = personDao.findById(command.getId());
+        if(person != null) {
+            setPerson(command, person);
+        }
+        return person;
     }
 
     @Override
@@ -44,6 +51,12 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public List<Person> list() {
-        return null;
+        return personDao.list();
+    }
+
+    private void setPerson(NewPersonCommand command, Person person) {
+        person.setName(new PersonName(command.getName(), command.getSurname()));
+        person.setBirthDate(command.getBirthDate());
+        person.setEmail(command.getEmail());
     }
 }

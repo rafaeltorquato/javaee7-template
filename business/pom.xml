@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>study</groupId>
-            <artifactId>components</artifactId>
+            <artifactId>component</artifactId>
         </dependency>
     </dependencies>
 

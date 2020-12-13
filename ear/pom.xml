@@ -46,6 +46,13 @@
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <configuration>
+                    <server-config>standalone-full.xml</server-config>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

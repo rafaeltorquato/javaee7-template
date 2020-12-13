@@ -8,12 +8,14 @@ import javax.batch.runtime.BatchRuntime;
 import javax.batch.runtime.BatchStatus;
 import javax.batch.runtime.JobExecution;
 import javax.ejb.*;
-import javax.enterprise.context.Dependent;
 import java.util.Properties;
+import java.util.logging.Logger;
 
-@Dependent
+@Startup
 @Singleton
 public class SummarizePersonBatchStarter {
+
+    private static final Logger logger = Logger.getLogger(SummarizePersonBatchStarter.class.getSimpleName());
 
     @Resource
     private TimerService timerService;
@@ -24,17 +26,19 @@ public class SummarizePersonBatchStarter {
     public void initialize() {
         ScheduleExpression expression = new ScheduleExpression()
                 .dayOfMonth("*")
-                .hour("00")
-                .minute("0")
-                .second("0");
+                .hour("*")
+                .minute("*")
+                .second("*/3");
         TimerConfig timerConfig = new TimerConfig();
         timerConfig.setInfo("Send Person Daily Summary.");
         timerService.createCalendarTimer(expression, timerConfig);
+        logger.info("Initialized.");
     }
 
 
     @Timeout
     public void timeout(Timer timer) {
+        logger.info("Timeout!");
         JobOperator jobOperator = BatchRuntime.getJobOperator();
         if(lastJobExecutionId != null) {
             final JobExecution jobExecution = jobOperator.getJobExecution(lastJobExecutionId);

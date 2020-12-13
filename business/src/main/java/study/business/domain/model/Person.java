@@ -1,6 +1,7 @@
 package study.business.domain.model;
 
 import study.business.domain.converter.PersonNameConverter;
+import study.business.infrastructure.jpa.PersonDaoJpa;
 import study.components.validation.NotEmpty;
 
 import javax.persistence.*;
@@ -10,8 +11,16 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+@NamedQueries({
+        @NamedQuery(
+                name = Person.LIST_ALL,
+                query = "select p from Person p join fetch p.phones join fetch p.relationships join fetch p.addresses"
+        )
+})
 @Entity
 public class Person {
+
+    public static final String LIST_ALL = "Person.listAll";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

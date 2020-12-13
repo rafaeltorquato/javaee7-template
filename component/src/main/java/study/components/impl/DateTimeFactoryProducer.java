@@ -17,17 +17,16 @@ public class DateTimeFactoryProducer {
 
     @Inject
     private DateTimeFactoryImpl dateTimeFactory;
-    @Inject
-    private DateTimeFactoryCalendarImpl dateTimeFactoryCalendar;
+    //private DateTimeFactoryCalendarImpl dateTimeFactoryCalendar;
 
     @Produces
     @ChosenDateTimeFactory
-    @RequestScoped
+    @ApplicationScoped
     public DateTimeFactory getDateTimeFactory() {
         //if
         ;//return dateTimeFactory;
         //else
-        return dateTimeFactoryCalendar;
+        return new DateTimeFactoryCalendarImpl();
     }
 
     public void close(@Disposes @ChosenDateTimeFactory DateTimeFactory dateTimeFactory) {

@@ -23,6 +23,7 @@
         <maven.test.skip>true</maven.test.skip>
         <javaee-api.version>7.0</javaee-api.version>
         <hibernate.version>4.3.7.Final</hibernate.version>
+        <wildfly-maven-plugin.version>2.0.2.Final</wildfly-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -83,6 +84,11 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-ear-plugin</artifactId>
                     <version>3.1.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.wildfly.plugins</groupId>
+                    <artifactId>wildfly-maven-plugin</artifactId>
+                    <version>${wildfly-maven-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

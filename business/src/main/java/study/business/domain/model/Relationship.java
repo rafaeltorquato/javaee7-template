@@ -14,11 +14,11 @@ public class Relationship {
     @NotNull
     @Enumerated(EnumType.STRING)
     @ManyToOne
-    @JoinColumn(name = "sourceId", referencedColumnName = "id")
+    @JoinColumn(name = "sourceId", referencedColumnName = "id", insertable = false, updatable = false)
     private Person source;
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "targetId", referencedColumnName = "id")
+    @JoinColumn(name = "targetId", referencedColumnName = "id", insertable = false, updatable = false)
     private Person target;
     @NotNull
     @Column(nullable = false)

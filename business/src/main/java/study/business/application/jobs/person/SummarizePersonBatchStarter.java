@@ -47,6 +47,7 @@ public class SummarizePersonBatchStarter {
             }
         }
         lastJobExecutionId = jobOperator.start("summarizePersonJob", new Properties());
+        logger.info("New batch job " + lastJobExecutionId);
     }
 
 }

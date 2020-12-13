@@ -14,7 +14,7 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(
                 name = Person.LIST_ALL,
-                query = "select p from Person p join fetch p.phones join fetch p.relationships join fetch p.addresses"
+                query = "select p from Person p left join fetch p.phones left join fetch p.relationships left join fetch p.addresses"
         )
 })
 @Entity

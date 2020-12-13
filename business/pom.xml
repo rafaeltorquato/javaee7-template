@@ -21,6 +21,10 @@
             <groupId>study</groupId>
             <artifactId>component</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

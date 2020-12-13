@@ -6,6 +6,8 @@ import study.business.application.service.EmailService;
 
 import javax.annotation.Resource;
 import javax.ejb.*;
+import javax.enterprise.concurrent.ManagedExecutorService;
+import javax.enterprise.concurrent.ManagedScheduledExecutorService;
 import javax.inject.Inject;
 import javax.jms.JMSContext;
 import javax.jms.Queue;
@@ -15,6 +17,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Date;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,12 +31,12 @@ public class EmailServiceImpl implements EmailService {
 
     @Resource(name = "mail/MailSession")
     private Session session;
-
     @Inject
     private JMSContext jmsContext;
-
     @Resource(lookup = JmsConfig.PENDING_EMAILS_QUEUE_NAME)
     private Queue queue;
+    @Resource(name="java:comp/DefaultManagedExecutorService")
+    private ManagedExecutorService managedExecutorService;
 
     @Override
     public Boolean send(String email, String subject, String message) {
@@ -50,22 +54,32 @@ public class EmailServiceImpl implements EmailService {
         jmsContext.createProducer().send(queue, new EmailEvent(email, subject, message));
     }
 
-    private Boolean execute(String email, String subject, String message) {
+    private Boolean execute(final String email, final String subject, final String message) {
+        final Future<Boolean> future = managedExecutorService.submit(new Callable<Boolean>() {
+            @Override
+            public Boolean call() {
+                try {
+                    Message mimeMessage = new MimeMessage(session);
+                    mimeMessage.setFrom(InternetAddress.parse("test@test.com")[0]);
+                    mimeMessage.setRecipients(Message.RecipientType.TO,
+                            InternetAddress.parse(email, false));
+                    mimeMessage.setSubject(subject);
+                    mimeMessage.setHeader("X-Mailer", "JavaMail");
+                    Date timeStamp = new Date();
+                    mimeMessage.setText(message);
+                    mimeMessage.setSentDate(timeStamp);
+                    Transport.send(mimeMessage);
+                    return true;
+                } catch (Exception e) {
+                    logger.log(Level.SEVERE, e.getMessage(), e);
+                    return false;
+                }
+            }
+        });
         try {
-            Message mimeMessage = new MimeMessage(session);
-            mimeMessage.setFrom(InternetAddress.parse("test@test.com")[0]);
-            mimeMessage.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(email, false));
-            mimeMessage.setSubject(subject);
-            mimeMessage.setHeader("X-Mailer", "JavaMail");
-            Date timeStamp = new Date();
-            mimeMessage.setText(message);
-            mimeMessage.setSentDate(timeStamp);
-            Transport.send(mimeMessage);
-            return true;
+            return future.get();
         } catch (Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-            return false;
+            throw new RuntimeException(e);
         }
     }
 

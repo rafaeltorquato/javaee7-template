@@ -21,6 +21,8 @@
         <maven.compiler.source>1.7</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.test.skip>true</maven.test.skip>
+        <javaee-api.version>7.0</javaee-api.version>
+        <hibernate.version>4.3.7.Final</hibernate.version>
     </properties>
 
     <dependencyManagement>
@@ -28,7 +30,7 @@
             <dependency>
                 <groupId>javax</groupId>
                 <artifactId>javaee-api</artifactId>
-                <version>7.0</version>
+                <version>${javaee-api.version}</version>
                 <scope>provided</scope>
             </dependency>
 
@@ -36,21 +38,30 @@
             <dependency>
                 <groupId>study</groupId>
                 <artifactId>component</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${project.version}</version>
                 <scope>provided</scope>
+                <type>jar</type>
             </dependency>
             <dependency>
                 <groupId>study</groupId>
                 <artifactId>business</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${project.version}</version>
                 <scope>provided</scope>
                 <type>ejb</type>
             </dependency>
             <dependency>
                 <groupId>study</groupId>
                 <artifactId>web</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${project.version}</version>
                 <type>war</type>
+            </dependency>
+
+            <!-- Libs -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.version}</version>
+                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

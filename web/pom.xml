@@ -22,6 +22,10 @@
             <artifactId>business</artifactId>
             <type>ejb</type>
         </dependency>
+        <dependency>
+            <groupId>study</groupId>
+            <artifactId>component</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -3,6 +3,8 @@ package study.business.domain.model;
 import study.components.validation.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.Objects;
 
 
@@ -18,6 +20,9 @@ public class Address {
     private String value;
     @Version
     private Integer version;
+    @NotNull
+    @Column(length = 1000, nullable = false)
+    private Date registerDateTime;
 
     @Override
     public boolean equals(Object o) {

@@ -16,21 +16,22 @@
         <dependency>
             <groupId>study</groupId>
             <artifactId>business</artifactId>
-            <scope>compile</scope>
             <type>ejb</type>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>study</groupId>
             <artifactId>web</artifactId>
             <type>war</type>
+            <scope>compile</scope>
         </dependency>
-
-        <!--Libraries-->
         <dependency>
             <groupId>study</groupId>
             <artifactId>component</artifactId>
+            <type>jar</type>
             <scope>compile</scope>
         </dependency>
+        <!--Libraries-->
     </dependencies>
 
     <build>

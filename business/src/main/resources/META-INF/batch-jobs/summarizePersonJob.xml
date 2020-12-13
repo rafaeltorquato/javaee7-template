@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job id="summarizePersonJob" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+     version="1.0">
+    <properties>
+        <property name="input_file" value="input.txt"/>
+        <property name="output_file" value="output.txt"/>
+    </properties>
+    <listeners>
+        <listener ref="SummarizePersonJobListener"/>
+    </listeners>
+    <step id="generatePersonCountSummary">
+<!--        <properties></properties>-->
+        <listeners>
+            <listener ref="StepListenerImpl"/>
+            <listener ref="ItemReadListenerImpl" />
+            <listener ref="ItemProcessListenerImpl" />
+            <listener ref="ItemWriteListenerImpl" />
+        </listeners>
+        <chunk checkpoint-policy="item" item-count="2" time-limit="180">
+            <reader ref="PersonCountSummaryReader" />
+            <processor ref="PersonCountSummaryProcessor" />
+            <writer ref="PersonCountSummaryWriter" />
+<!--            <skippable-exception-classes>-->
+<!--                <include class="pkg.MyItemException"/>-->
+<!--                <exclude class="pkg.MyItemSeriousSubException"/>-->
+<!--            </skippable-exception-classes>-->
+<!--            <retryable-exception-classes>-->
+<!--                <include class="pkg.MyResourceTempUnavailable"/>-->
+<!--            </retryable-exception-classes>-->
+        </chunk>
+        <end on="COMPLETED" exit-status="COMPLETED"/>
+<!--        <chunk checkpoint-policy="item" item-count="30" retry-limit="5" skip-limit="2">-->
+
+<!--            <retryable-exception-classes>-->
+<!--                <exclude class=""/>-->
+<!--                <exclude class=""/>-->
+<!--                <include class=""/>-->
+<!--                <include class=""/>-->
+<!--            </retryable-exception-classes>-->
+<!--            <skippable-exception-classes>-->
+<!--                <exclude class=""/>-->
+<!--                <exclude class=""/>-->
+<!--                <include class=""/>-->
+<!--                <include class=""/>-->
+<!--            </skippable-exception-classes>-->
+<!--            <no-rollback-exception-classes>-->
+<!--                <exclude class=""/>-->
+<!--                <exclude class=""/>-->
+<!--                <include class=""/>-->
+<!--                <include class=""/>-->
+<!--            </no-rollback-exception-classes>-->
+
+<!--        </chunk>-->
+<!--        <partition>-->
+<!--            <plan partitions="2" threads="2">-->
+<!--                <properties partition="0">-->
+<!--                    <property name="firstItem" value="0"/>-->
+<!--                    <property name="lastItem" value="500"/>-->
+<!--                </properties>-->
+<!--                <properties partition="1">-->
+<!--                    <property name="firstItem" value="501"/>-->
+<!--                    <property name="lastItem" value="999"/>-->
+<!--                </properties>-->
+<!--            </plan>-->
+<!--        </partition>-->
+<!--        <partition>-->
+<!--            <mapper ref="MyPartitionMapperImpl"/>-->
+<!--            <reducer ref="MyPartitionReducerImpl"/>-->
+<!--            <collector ref="MyPartitionCollectorImpl"/>-->
+<!--            <analyzer ref="MyPartitionAnalyzerImpl"/>-->
+<!--        </partition>-->
+<!--        <end on="COMPLETED" exit-status="MY_COMPLETED_EXIT_STATUS"/>-->
+<!--        <stop on="MY_TEMP_ISSUE_EXIST_STATUS" restart="step0"/>-->
+<!--        <fail on="MY_ERROR_EXIT_STATUS" exit-status="MY_ERROR_EXIT_STATUS"/>-->
+    </step>
+<!--    <step id="stepB" next="stepC">-->
+<!--        <listener ref="MyStepListenerImpl"/>-->
+<!--        <properties></properties>-->
+<!--        <batchlet ref="pkg.MyBatchletImpl">-->
+<!--            <properties>-->
+<!--                <property name="pname" value="pvalue"/>-->
+<!--            </properties>-->
+<!--        </batchlet>-->
+<!--        <end on="COMPLETED"/>-->
+<!--    </step>-->
+<!--    <flow id="flowA" next="stepE">-->
+<!--        <step id="flowAstepA" next="flowAstepB">...</step>-->
+<!--        <step id="flowAstepB" next="flowAflowC">...</step>-->
+<!--        <flow id="flowAflowC" next="flowAsplitD">...</flow>-->
+<!--        <split id="flowAsplitD" next="flowAstepE">...</split>-->
+<!--        <step id="flowAstepE">...</step>-->
+<!--    </flow>-->
+
+<!--    <decision id="decisionA" ref="MyDeciderImpl">-->
+<!--        <properties>-->
+<!--            <property name="pname" value="pvalue"/>-->
+<!--        </properties>-->
+<!--        <fail on="FAILED" exit-status="FAILED_AT_DECIDER"/>-->
+<!--        <fail on="FAILED" exit-status="FAILED_AT_DECIDER"/>-->
+<!--        <end on="COMPLETED" exit-status="COMPLETED_AT_DECIDER"/>-->
+<!--        <end on="COMPLETED" exit-status="COMPLETED_AT_DECIDER"/>-->
+<!--        <stop on="STOPPED" restart="step2"/>-->
+<!--        <stop on="STOPPED" restart="step2"/>-->
+<!--        <next on="" to=""/>-->
+<!--        <next on="" to=""/>-->
+<!--    </decision>-->
+</job>

@@ -3,14 +3,12 @@ package study.business.domain.model;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import study.business.infrastructure.jpa.AddressDaoJpa;
 import study.components.validation.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 
 
 @NamedQueries({

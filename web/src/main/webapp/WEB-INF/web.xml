@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
     
-    <listener>
-        <listener-class>study.web.config.ServletContextListenerImpl</listener-class>
-    </listener>
+<!--    <listener>-->
+<!--        <listener-class>study.web.config.ServletContextListenerImpl</listener-class>-->
+<!--    </listener>-->
     <!--       <web-app  metadata-complete="true"... desbilita o processamento das anotações-->
 
 <!--    <servlet>-->

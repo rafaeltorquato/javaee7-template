@@ -4,10 +4,12 @@ import study.web.person.wsocket.AddPersonEndpoint;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 import javax.websocket.DeploymentException;
 import javax.websocket.server.ServerContainer;
 import javax.websocket.server.ServerEndpointConfig;
 
+@WebListener
 public class ServletContextListenerImpl implements ServletContextListener {
 
     @Override

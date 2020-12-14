@@ -1,25 +1,33 @@
 package study.web.person.facade.internal;
 
-import study.business.application.service.EmailService;
 import study.business.application.service.PersonService;
+import study.business.domain.model.Person;
 import study.web.person.facade.PersonFacade;
 import study.web.person.facade.dto.PersonDTO;
+import study.web.person.facade.mapper.PersonMapper;
 
 import javax.ejb.EJB;
-import javax.inject.Singleton;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import java.util.List;
 
-@Singleton
+@RequestScoped
 public class PersonFacadeImpl implements PersonFacade {
 
     @EJB
     private PersonService personService;
-    @EJB
-    private EmailService emailService;
-    //TODO JMS log
+    @Inject
+    private PersonMapper personMapper;
 
     @Override
-    public List<PersonDTO> search(String term) {
+    public List<PersonDTO> list() {
+        return personMapper.toListDTO(personService.list());
+    }
+
+    @Override
+    public PersonDTO save(PersonDTO personDTO) {
+        final Person person = personMapper.fromDTO(personDTO);
+        //TODO
         return null;
     }
 

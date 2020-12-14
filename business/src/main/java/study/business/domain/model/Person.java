@@ -1,12 +1,14 @@
 package study.business.domain.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import study.business.domain.converter.PersonNameConverter;
-import study.business.infrastructure.jpa.PersonDaoJpa;
 import study.components.validation.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,11 +16,13 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(
                 name = Person.LIST_ALL,
-                query = "select p from Person p left join fetch p.phones left join fetch p.relationships left join fetch p.addresses"
+                query = "select distinct p from Person p left join fetch p.phones left join fetch p.relationships left join fetch p.addresses"
         )
 })
+@Getter
+@Setter
 @Entity
-public class Person {
+public class Person implements Serializable {
 
     public static final String LIST_ALL = "Person.listAll";
 
@@ -67,78 +71,4 @@ public class Person {
         this.registerDateTime = new Date();
     }
 
-    //JavaBean specification
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public PersonName getName() {
-        return name;
-    }
-
-    public void setName(PersonName name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public Date getRegisterDateTime() {
-        return registerDateTime;
-    }
-
-    public void setRegisterDateTime(Date registerDateTime) {
-        this.registerDateTime = registerDateTime;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
-    public Set<Phone> getPhones() {
-        return phones;
-    }
-
-    public void setPhones(Set<Phone> phones) {
-        this.phones = phones;
-    }
-
-    public Set<Relationship> getRelationships() {
-        return relationships;
-    }
-
-    public void setRelationships(Set<Relationship> relationships) {
-        this.relationships = relationships;
-    }
-
-    public Set<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(Set<Address> addresses) {
-        this.addresses = addresses;
-    }
 }

@@ -1,12 +1,19 @@
 package study.business.domain.model;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.Objects;
+import java.io.Serializable;
 
 @Entity
-public class Relationship {
+@Getter
+@Setter
+@EqualsAndHashCode(of = {"id", "type"})
+public class Relationship implements Serializable {
     @Valid
     @EmbeddedId
     @NotNull
@@ -24,51 +31,4 @@ public class Relationship {
     @Column(nullable = false)
     private RelationshipType type;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Relationship that = (Relationship) o;
-        return id.equals(that.id) &&
-                type == that.type;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, type);
-    }
-
-    //Javabeans specification
-
-    public RelationshipId getId() {
-        return id;
-    }
-
-    public void setId(RelationshipId id) {
-        this.id = id;
-    }
-
-    public Person getSource() {
-        return source;
-    }
-
-    public void setSource(Person source) {
-        this.source = source;
-    }
-
-    public Person getTarget() {
-        return target;
-    }
-
-    public void setTarget(Person target) {
-        this.target = target;
-    }
-
-    public RelationshipType getType() {
-        return type;
-    }
-
-    public void setType(RelationshipType type) {
-        this.type = type;
-    }
 }

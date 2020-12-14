@@ -6,8 +6,7 @@ import javax.inject.Named;
 import java.util.logging.Logger;
 
 @Dependent
-@Named("ItemReadListenerImpl")
-public class ItemReadListenerImpl implements ItemReadListener {
+@Named("ItemReadListenerImpl") public class ItemReadListenerImpl implements ItemReadListener {
 
     private static final Logger logger = Logger.getLogger(ItemReadListenerImpl.class.getSimpleName());
 

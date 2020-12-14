@@ -1,10 +1,14 @@
 package study.business.domain.model;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import study.business.infrastructure.jpa.AddressDaoJpa;
 import study.components.validation.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
@@ -20,7 +24,10 @@ import java.util.Objects;
         )
 })
 @Entity
-public class Address {
+@Getter
+@Setter
+@EqualsAndHashCode(of = "id")
+public class Address implements Serializable {
 
     public static final String SEARCH_BY_TERM = "Address.searchByTerm";
     public static final String LIST_ALL = "Address.listAll";
@@ -37,24 +44,4 @@ public class Address {
     @Column(length = 1000, nullable = false)
     private Date registerDateTime;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Address address = (Address) o;
-        return id.equals(address.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
 }

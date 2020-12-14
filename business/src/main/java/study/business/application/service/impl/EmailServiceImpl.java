@@ -1,5 +1,6 @@
 package study.business.application.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import study.business.application.config.JmsConfig;
 import study.business.application.event.EmailEvent;
 import study.business.application.service.EmailService;
@@ -7,7 +8,6 @@ import study.business.application.service.EmailService;
 import javax.annotation.Resource;
 import javax.ejb.*;
 import javax.enterprise.concurrent.ManagedExecutorService;
-import javax.enterprise.concurrent.ManagedScheduledExecutorService;
 import javax.inject.Inject;
 import javax.jms.JMSContext;
 import javax.jms.Queue;
@@ -18,16 +18,12 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Date;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+@Slf4j
 @Stateless
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class EmailServiceImpl implements EmailService {
-
-    private static final Logger logger = Logger.getLogger(EmailServiceImpl.class.getName());
 
     @Resource(name = "mail/MailSession")
     private Session session;
@@ -71,7 +67,7 @@ public class EmailServiceImpl implements EmailService {
                     Transport.send(mimeMessage);
                     return true;
                 } catch (Exception e) {
-                    logger.log(Level.SEVERE, e.getMessage(), e);
+                    log.error(e.getMessage(), e);
                     return false;
                 }
             }

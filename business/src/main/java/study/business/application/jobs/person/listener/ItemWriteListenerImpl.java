@@ -1,29 +1,29 @@
 package study.business.application.jobs.person.listener;
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.batch.api.chunk.listener.ItemWriteListener;
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 import java.util.List;
-import java.util.logging.Logger;
 
+@Slf4j
 @Dependent
 @Named("ItemWriteListenerImpl")
 public class ItemWriteListenerImpl implements ItemWriteListener {
 
-    private static final Logger logger = Logger.getLogger(ItemWriteListenerImpl.class.getSimpleName());
-
     @Override
     public void beforeWrite(List<Object> items) throws Exception {
-        logger.info("Writing " + items.size() + " items...");
+        log.info("Writing {} items...", items.size());
     }
 
     @Override
     public void afterWrite(List<Object> items) throws Exception {
-        logger.info("Written " + items.size() + " items!");
+        log.info("Written {} items!", items.size());
     }
 
     @Override
     public void onWriteError(List<Object> items, Exception ex) throws Exception {
-        logger.info("Write error! Items count: " + items.size() + ", ex: " + ex);
+        log.info("Write error! Items count: {}, ex: {}", items.size(), ex);
     }
 }

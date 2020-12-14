@@ -1,5 +1,6 @@
 package study.business.application.consumer;
 
+import lombok.extern.slf4j.Slf4j;
 import study.business.application.config.JmsConfig;
 import study.business.application.event.EmailEvent;
 import study.business.application.service.EmailService;
@@ -12,9 +13,9 @@ import javax.ejb.MessageDrivenContext;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Slf4j
 @MessageDriven(activationConfig = {
         @ActivationConfigProperty(propertyName = "destinationLookup",
                 propertyValue = JmsConfig.PENDING_EMAILS_QUEUE_NAME),
@@ -37,7 +38,7 @@ public class SendEmailConsumer implements MessageListener {
             final EmailEvent emailEvent = message.getBody(EmailEvent.class);
             emailService.send(emailEvent.getEmail(), emailEvent.getSubject(), emailEvent.getMessage());
         } catch (JMSException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            log.error(e.getMessage(), e);
             mdc.setRollbackOnly();
         }
     }

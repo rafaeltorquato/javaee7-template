@@ -24,7 +24,9 @@ public class ServletContextListenerImpl implements ServletContextListener {
 
     private void addProgrammaticEndpoints(ServletContextEvent sce) {
         try {
-            final ServerEndpointConfig config = ServerEndpointConfig.Builder.create(AddPersonEndpoint.class, "/socket/person/add").build();
+            final ServerEndpointConfig config = ServerEndpointConfig.Builder
+                    .create(AddPersonEndpoint.class, AddPersonEndpoint.MY_URL)
+                    .build();
             final ServerContainer container = (ServerContainer) sce.getServletContext().getAttribute(ServerContainer.class.getName());
             container.addEndpoint(config);
         } catch (DeploymentException e) {

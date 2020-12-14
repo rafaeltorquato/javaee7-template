@@ -1,12 +1,14 @@
 package study.components.interceptor;
 
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.annotation.Priority;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
-import java.util.logging.Logger;
 
+@Slf4j
 @Logged
 @Interceptor
 @Priority(Interceptor.Priority.APPLICATION)
@@ -15,10 +17,9 @@ public class LogInterceptor {
     @AroundInvoke
     public Object aroundInvoke(InvocationContext invocationContext) throws Exception {
         String simpleName = invocationContext.getTarget().getClass().getSimpleName();
-        Logger logger = Logger.getLogger(simpleName);
-        logger.info("Executing " + simpleName + "::" + invocationContext.getMethod().getName());
+        log.info("Executing {}::{}", simpleName, invocationContext.getMethod().getName());
         Object result = invocationContext.proceed();
-        logger.info(simpleName + "::" + invocationContext.getMethod().getName() + " executed!");
+        log.info("{}::{} executed!", simpleName,invocationContext.getMethod().getName());
         return result;
     }
 

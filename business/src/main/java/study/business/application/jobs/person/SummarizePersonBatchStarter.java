@@ -1,6 +1,8 @@
 package study.business.application.jobs.person;
 
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.batch.operations.JobOperator;
@@ -9,13 +11,11 @@ import javax.batch.runtime.BatchStatus;
 import javax.batch.runtime.JobExecution;
 import javax.ejb.*;
 import java.util.Properties;
-import java.util.logging.Logger;
 
+@Slf4j
 @Startup
 @Singleton
 public class SummarizePersonBatchStarter {
-
-    private static final Logger logger = Logger.getLogger(SummarizePersonBatchStarter.class.getSimpleName());
 
     @Resource
     private TimerService timerService;
@@ -32,13 +32,13 @@ public class SummarizePersonBatchStarter {
         TimerConfig timerConfig = new TimerConfig();
         timerConfig.setInfo("Send Person Daily Summary.");
         timerService.createCalendarTimer(expression, timerConfig);
-        logger.info("Initialized.");
+        log.info("Initialized.");
     }
 
 
     @Timeout
     public void timeout(Timer timer) {
-        logger.info("Timeout!");
+        log.info("Timeout!");
         JobOperator jobOperator = BatchRuntime.getJobOperator();
         if(lastJobExecutionId != null) {
             final JobExecution jobExecution = jobOperator.getJobExecution(lastJobExecutionId);
@@ -47,7 +47,7 @@ public class SummarizePersonBatchStarter {
             }
         }
         lastJobExecutionId = jobOperator.start("summarizePersonJob", new Properties());
-        logger.info("New batch job " + lastJobExecutionId);
+        log.info("New batch job {}", lastJobExecutionId);
     }
 
 }

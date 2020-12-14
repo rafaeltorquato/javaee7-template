@@ -1,15 +1,16 @@
 package study.components.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import study.components.ChosenDateTimeFactory;
 import study.components.DateTimeFactory;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import java.util.logging.Logger;
 
+@Slf4j
 @ApplicationScoped
 public class DateTimeFactoryProducer {
 
@@ -30,7 +31,7 @@ public class DateTimeFactoryProducer {
     }
 
     public void close(@Disposes @ChosenDateTimeFactory DateTimeFactory dateTimeFactory) {
-        logger.info("Disposed " + dateTimeFactory.getClass().getName() + " bean.");
+        log.info("Disposed {} bean.", dateTimeFactory.getClass().getName());
     }
 
 }

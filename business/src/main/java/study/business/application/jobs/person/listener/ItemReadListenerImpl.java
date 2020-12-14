@@ -1,27 +1,29 @@
 package study.business.application.jobs.person.listener;
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.batch.api.chunk.listener.ItemReadListener;
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
-import java.util.logging.Logger;
 
+@Slf4j
 @Dependent
-@Named("ItemReadListenerImpl") public class ItemReadListenerImpl implements ItemReadListener {
+@Named("ItemReadListenerImpl")
+public class ItemReadListenerImpl implements ItemReadListener {
 
-    private static final Logger logger = Logger.getLogger(ItemReadListenerImpl.class.getSimpleName());
 
     @Override
     public void beforeRead() throws Exception {
-        logger.info("Reading...");
+        log.info("Reading...");
     }
 
     @Override
     public void afterRead(Object item) throws Exception {
-        logger.info("Read: " + item);
+        log.info("Read: {}", item);
     }
 
     @Override
     public void onReadError(Exception ex) throws Exception {
-        logger.info("Read error!");
+        log.info("Read error!");
     }
 }

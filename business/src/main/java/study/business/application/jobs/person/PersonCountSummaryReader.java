@@ -1,5 +1,6 @@
 package study.business.application.jobs.person;
 
+import lombok.extern.slf4j.Slf4j;
 import study.business.domain.model.Person;
 import study.business.domain.model.PersonDao;
 
@@ -10,6 +11,7 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
+@Slf4j
 @Dependent
 @Named("PersonCountSummaryReader")
 public class PersonCountSummaryReader implements ItemReader {
@@ -24,11 +26,12 @@ public class PersonCountSummaryReader implements ItemReader {
     public void open(Serializable checkpoint) throws Exception {
         if(checkpoint != null) {
             this.checkpoint = (PersonCountSummaryCheckpoint) checkpoint;
-            this.checkpoint.next();
         } else {
             this.checkpoint = new PersonCountSummaryCheckpoint();
-            personList = personDao.list();
         }
+        log.info("Selecting new list...");
+        personList = personDao.list();
+        log.info("Person size: " + personList.size());
     }
 
     @Override
@@ -39,7 +42,9 @@ public class PersonCountSummaryReader implements ItemReader {
     @Override
     public Object readItem() throws Exception {
         try {
+            log.info("Reading index:" + this.checkpoint.getIndex());
             final Person person = personList.get(this.checkpoint.getIndex());
+            checkpoint.next();
             return person;
         } catch (IndexOutOfBoundsException e) {
             return null;

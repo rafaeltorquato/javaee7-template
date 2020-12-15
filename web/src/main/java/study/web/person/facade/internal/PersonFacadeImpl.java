@@ -3,15 +3,16 @@ package study.web.person.facade.internal;
 import study.business.application.service.PersonService;
 import study.business.domain.model.Person;
 import study.web.person.facade.PersonFacade;
+import study.web.person.facade.dto.NewPersonCommandDTO;
 import study.web.person.facade.dto.PersonDTO;
 import study.web.person.facade.mapper.PersonMapper;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.List;
 
-@RequestScoped
+@ApplicationScoped
 public class PersonFacadeImpl implements PersonFacade {
 
     @EJB
@@ -25,10 +26,9 @@ public class PersonFacadeImpl implements PersonFacade {
     }
 
     @Override
-    public PersonDTO save(PersonDTO personDTO) {
-        final Person person = personMapper.fromDTO(personDTO);
-        //TODO
-        return null;
+    public PersonDTO save(NewPersonCommandDTO commandDTO) {
+        final Person person = personService.newPerson(personMapper.fromDTO(commandDTO));
+        return personMapper.toDTO(person);
     }
 
 }

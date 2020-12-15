@@ -13,21 +13,25 @@ import java.util.List;
 
 @Slf4j
 @ServerEndpoint(
-        value = "/socket/person/list",
-        encoders = {PersonDTOJsonEncoder.class},
-        decoders = {PersonDTOJsonDecoder.class}
+        value = "/socket/persons/list",
+        encoders = {PersonDTOJsonEncoder.class, PersonDTOJsonArrayEncoder.class},
+        decoders = {NewPersonCommandDTOJsonDecoder.class}
 )
 public class ListPersonEndpoint {
 
 
     @Inject
     private PersonFacade personFacade;
+    @Inject
+    private SharedSessions sharedSessions;
 
     private Session session;
 
     @OnOpen
     public void open(Session session, EndpointConfig conf) {
         this.session = session;
+        sharedSessions.getListSessions().add(session);
+
     }
 
     @OnMessage
@@ -52,6 +56,7 @@ public class ListPersonEndpoint {
 
     @OnClose
     public void close(Session session, CloseReason reason) {
+        sharedSessions.getListSessions().remove(session);
     }
 
 

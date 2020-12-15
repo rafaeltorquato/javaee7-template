@@ -9,7 +9,7 @@ public class PersonNameConverter implements AttributeConverter<PersonName, Strin
     public String convertToDatabaseColumn(PersonName attribute) {
         String dbColumn = null;
         if(attribute != null) {
-            dbColumn = attribute.getName() + " " + attribute.getSurname();
+            dbColumn = attribute.getName().trim() + " " + attribute.getSurname().trim();
         }
         return dbColumn;
     }
@@ -22,7 +22,7 @@ public class PersonNameConverter implements AttributeConverter<PersonName, Strin
             if(i > 0) {
                 String name = dbData.substring(0, i);
                 String surname = dbData.substring(i);
-                personName =  new PersonName(name, surname);
+                personName =  new PersonName(name.trim(), surname.trim());
             }
         }
         return personName;

@@ -16,7 +16,7 @@
             <listener ref="ItemProcessListenerImpl" />
             <listener ref="ItemWriteListenerImpl" />
         </listeners>
-        <chunk checkpoint-policy="item" item-count="2" time-limit="180">
+        <chunk checkpoint-policy="item" item-count="10" time-limit="180">
             <reader ref="PersonCountSummaryReader" />
             <processor ref="PersonCountSummaryProcessor" />
             <writer ref="PersonCountSummaryWriter" />

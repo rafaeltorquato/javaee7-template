@@ -1,20 +1,20 @@
 package study.web.person.wsocket;
 
 import com.google.gson.Gson;
-import study.web.person.facade.dto.PersonDTO;
+import study.web.person.facade.dto.NewPersonCommandDTO;
 import study.web.util.GsonInstance;
 
 import javax.websocket.DecodeException;
 import javax.websocket.Decoder;
 import javax.websocket.EndpointConfig;
 
-public class PersonDTOJsonDecoder implements Decoder.Text<PersonDTO> {
+public class NewPersonCommandDTOJsonDecoder implements Decoder.Text<NewPersonCommandDTO> {
 
     private final Gson gson = GsonInstance.getGson();
 
     @Override
-    public PersonDTO decode(String s) throws DecodeException {
-        return gson.fromJson(s, PersonDTO.class);
+    public NewPersonCommandDTO decode(String s) throws DecodeException {
+        return gson.fromJson(s, NewPersonCommandDTO.class);
     }
 
     @Override

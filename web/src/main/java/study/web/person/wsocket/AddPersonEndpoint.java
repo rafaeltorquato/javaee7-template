@@ -1,38 +1,46 @@
 package study.web.person.wsocket;
 
+import lombok.extern.slf4j.Slf4j;
 import study.web.person.facade.PersonFacade;
+import study.web.person.facade.dto.NewPersonCommandDTO;
 import study.web.person.facade.dto.PersonDTO;
 
 import javax.inject.Inject;
-import javax.websocket.Endpoint;
-import javax.websocket.EndpointConfig;
-import javax.websocket.MessageHandler;
+import javax.websocket.EncodeException;
+import javax.websocket.OnMessage;
 import javax.websocket.Session;
-import java.util.Set;
+import javax.websocket.server.ServerEndpoint;
+import java.io.IOException;
+import java.util.List;
 
-public class AddPersonEndpoint extends Endpoint {
-
-    public static final String MY_URL = "/socket/person/add";
+@Slf4j
+@ServerEndpoint(
+        value = "/socket/persons/add",
+        encoders = {PersonDTOJsonEncoder.class, PersonDTOJsonArrayEncoder.class},
+        decoders = {NewPersonCommandDTOJsonDecoder.class}
+)
+public class AddPersonEndpoint {
 
     @Inject
     private PersonFacade personFacade;
+    @Inject
+    private SharedSessions sharedSessions;
 
-    @Override
-    public void onOpen(final Session session, final EndpointConfig config) {
-        config.getDecoders().add(PersonDTOJsonDecoder.class);
-        config.getEncoders().add(PersonDTOJsonEncoder.class);
 
-        session.addMessageHandler(new MessageHandler.Whole<PersonDTO>() {
-            @Override
-            public void onMessage(PersonDTO message) {
-                PersonDTO saved = personFacade.save(message);
-                //Send to all sessions a new Person
-                final Set<Session> openedSessions = session.getOpenSessions();
-                for (Session s : openedSessions) {
-                    s.getAsyncRemote().sendObject(saved);
-                }
+    @OnMessage
+    public void onMessage(Session session, NewPersonCommandDTO message) {
+        log.info("Message received!");
+        PersonDTO saved = personFacade.save(message);
+        //Send to all sessions a new Person
+        final List<Session> openedSessions = sharedSessions.getListSessions();
+        for (Session s : openedSessions) {
+            try {
+                final List<PersonDTO> dtoList = personFacade.list();
+                s.getBasicRemote().sendObject(dtoList);
+            } catch (IOException | EncodeException e) {
+                e.printStackTrace();
             }
-        });
+        }
     }
 
 }

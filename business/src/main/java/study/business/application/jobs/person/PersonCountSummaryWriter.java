@@ -12,12 +12,12 @@ import java.util.List;
 @Named("PersonCountSummaryWriter")
 public class PersonCountSummaryWriter implements ItemWriter {
 
+    //TODO Create Dao
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
     public void open(Serializable checkpoint) throws Exception {
-
     }
 
     @Override
@@ -28,11 +28,7 @@ public class PersonCountSummaryWriter implements ItemWriter {
     @Override
     public void writeItems(List<Object> items) throws Exception {
         for (Object o : items) {
-            if (entityManager.contains(o)) {
-                entityManager.merge(o);
-            } else {
-                entityManager.persist(o);
-            }
+            entityManager.merge(o);
         }
     }
 

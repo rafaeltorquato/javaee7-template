@@ -1,7 +1,9 @@
 package study.web.person.facade.mapper;
 
 import org.mapstruct.Mapper;
+import study.business.application.service.PersonService;
 import study.business.domain.model.Person;
+import study.web.person.facade.dto.NewPersonCommandDTO;
 import study.web.person.facade.dto.PersonDTO;
 
 import java.util.List;
@@ -14,5 +16,7 @@ public interface PersonMapper {
     List<PersonDTO> toListDTO(List<Person> list);
 
     Person fromDTO(PersonDTO personDTO);
+
+    PersonService.NewPersonCommand fromDTO(NewPersonCommandDTO dto);
 
 }

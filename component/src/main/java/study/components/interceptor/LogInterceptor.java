@@ -30,8 +30,7 @@ public class LogInterceptor {
         Object[] parametersValue = invocationContext.getParameters();
         if (parametersValue != null) {
             String comma = "";
-            for (int i = 0; i < parametersValue.length; i++) {
-                Object o = parametersValue[i];
+            for (Object o : parametersValue) {
                 sb
                         .append(comma)
                         .append(o.getClass().getSimpleName())

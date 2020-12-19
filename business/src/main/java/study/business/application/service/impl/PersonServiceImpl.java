@@ -24,7 +24,7 @@ public class PersonServiceImpl implements PersonService {
     private Event<PersonDeletedEvent> personDeletedEvent;
 
     @Override
-    public Person newPerson(NewPersonCommand command) {
+    public Person save(NewPersonCommand command) {
         final Person person = new Person();
         setPerson(command, person);
         this.personDao.save(person);
@@ -32,7 +32,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person editPerson(EditPersonCommand command) {
+    public Person edit(EditPersonCommand command) {
         final Person person = personDao.findById(command.getId());
         if(person != null) {
             setPerson(command, person);
@@ -41,7 +41,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void deletePerson(Long id) {
+    public void delete(Long id) {
         Person person = personDao.findById(id);
         if(person != null) {
             personDao.delete(person);

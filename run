@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-docker build --tag=javaee7-study . && docker run -it --rm -p 8080:8080 javaee7-study

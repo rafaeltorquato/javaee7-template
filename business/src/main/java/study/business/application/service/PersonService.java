@@ -10,11 +10,11 @@ import java.util.List;
 @Local
 public interface PersonService {
 
-    Person newPerson(NewPersonCommand person);
+    Person save(NewPersonCommand person);
 
-    Person editPerson(EditPersonCommand person);
+    Person edit(EditPersonCommand person);
 
-    void deletePerson(@NotNull Long id);
+    void delete(@NotNull Long id);
 
     List<Person> list();
 

@@ -5,6 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import study.business.application.service.PersonService;
 import study.business.domain.model.Person;
+import study.web.person.facade.dto.EditPersonCommandDTO;
 import study.web.person.facade.dto.NewPersonCommandDTO;
 import study.web.person.facade.dto.PersonDTO;
 
@@ -22,5 +23,7 @@ public interface PersonMapper {
     List<PersonDTO> toListDTO(List<Person> list);
 
     PersonService.NewPersonCommand fromDTO(NewPersonCommandDTO dto);
+
+    PersonService.EditPersonCommand fromDTO(EditPersonCommandDTO dto);
 
 }

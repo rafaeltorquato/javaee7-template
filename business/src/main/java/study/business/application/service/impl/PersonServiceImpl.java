@@ -2,9 +2,10 @@ package study.business.application.service.impl;
 
 import study.business.application.event.PersonDeletedEvent;
 import study.business.application.service.PersonService;
-import study.business.domain.model.Person;
-import study.business.domain.model.PersonDao;
-import study.business.domain.model.PersonName;
+import study.business.domain.model.person.Person;
+import study.business.domain.model.person.PersonDao;
+import study.business.domain.model.person.PersonName;
+import study.components.interceptor.Logged;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -14,6 +15,7 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import java.util.List;
 
+@Logged
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 public class PersonServiceImpl implements PersonService {

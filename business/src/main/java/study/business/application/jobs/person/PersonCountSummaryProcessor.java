@@ -1,9 +1,9 @@
 package study.business.application.jobs.person;
 
 import lombok.extern.slf4j.Slf4j;
-import study.business.domain.model.Person;
-import study.business.domain.model.PersonCountSummary;
-import study.business.domain.model.PersonCountSummaryDao;
+import study.business.domain.model.person.Person;
+import study.business.domain.model.person.PersonCountSummary;
+import study.business.domain.model.person.PersonCountSummaryDao;
 
 import javax.batch.api.chunk.ItemProcessor;
 import javax.ejb.EJB;

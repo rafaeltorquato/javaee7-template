@@ -1,8 +1,8 @@
 package study.business.application.service.impl;
 
 import study.business.application.service.AddressService;
-import study.business.domain.model.Address;
-import study.business.domain.model.AddressDao;
+import study.business.domain.model.address.Address;
+import study.business.domain.model.address.AddressDao;
 import study.components.interceptor.Logged;
 
 import javax.annotation.Resource;
@@ -47,7 +47,7 @@ public class AddressServiceImpl implements AddressService {
         try {
             tx.begin();
             Address address = addressDao.findById(id);
-            if(address != null) {
+            if (address != null) {
                 addressDao.delete(address);
                 tx.commit();
             }

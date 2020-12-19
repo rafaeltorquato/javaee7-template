@@ -1,6 +1,6 @@
 package study.business.application.service;
 
-import study.business.domain.model.Address;
+import study.business.domain.model.address.Address;
 
 import javax.ejb.Local;
 

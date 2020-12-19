@@ -17,9 +17,9 @@ public class LogInterceptor {
     @AroundInvoke
     public Object aroundInvoke(InvocationContext invocationContext) throws Exception {
         String simpleName = invocationContext.getTarget().getClass().getSimpleName();
-        log.info("Executing {}::{}", simpleName, invocationContext.getMethod().getName());
+        log.info("Executing  method {}::{}", simpleName, invocationContext.getMethod().getName());
         Object result = invocationContext.proceed();
-        log.info("{}::{} executed!", simpleName,invocationContext.getMethod().getName());
+        log.info("Method {}::{} executed!", simpleName,invocationContext.getMethod().getName());
         return result;
     }
 

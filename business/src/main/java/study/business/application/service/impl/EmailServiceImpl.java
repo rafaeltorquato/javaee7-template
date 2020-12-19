@@ -1,9 +1,10 @@
 package study.business.application.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import study.business.application.config.JmsConfig;
 import study.business.application.event.EmailEvent;
 import study.business.application.service.EmailService;
+import study.business.infrastructure.config.JmsConfig;
+import study.components.interceptor.Logged;
 
 import javax.annotation.Resource;
 import javax.ejb.*;
@@ -21,6 +22,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
 @Slf4j
+@Logged
 @Stateless
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class EmailServiceImpl implements EmailService {

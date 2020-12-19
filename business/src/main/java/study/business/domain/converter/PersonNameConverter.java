@@ -1,6 +1,6 @@
 package study.business.domain.converter;
 
-import study.business.domain.model.PersonName;
+import study.business.domain.model.person.PersonName;
 
 import javax.persistence.AttributeConverter;
 

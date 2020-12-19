@@ -1,7 +1,7 @@
 package study.business.infrastructure.jpa;
 
-import study.business.domain.model.Address;
-import study.business.domain.model.AddressDao;
+import study.business.domain.model.address.Address;
+import study.business.domain.model.address.AddressDao;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;

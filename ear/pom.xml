@@ -21,7 +21,7 @@
         </dependency>
         <dependency>
             <groupId>study</groupId>
-            <artifactId>web</artifactId>
+            <artifactId>delivery</artifactId>
             <type>war</type>
             <scope>compile</scope>
         </dependency>

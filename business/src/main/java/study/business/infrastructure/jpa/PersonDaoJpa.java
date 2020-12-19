@@ -1,7 +1,7 @@
 package study.business.infrastructure.jpa;
 
-import study.business.domain.model.Person;
-import study.business.domain.model.PersonDao;
+import study.business.domain.model.person.Person;
+import study.business.domain.model.person.PersonDao;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;

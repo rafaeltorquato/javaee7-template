@@ -2,8 +2,8 @@ package study.business.application.observer;
 
 import study.business.application.event.PersonDeletedEvent;
 import study.business.application.service.EmailService;
-import study.business.domain.model.Person;
-import study.business.domain.model.PersonDao;
+import study.business.domain.model.person.Person;
+import study.business.domain.model.person.PersonDao;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

@@ -1,6 +1,6 @@
 package study.business.application.service;
 
-import study.business.domain.model.Person;
+import study.business.domain.model.person.Person;
 
 import javax.ejb.Local;
 import javax.validation.constraints.NotNull;

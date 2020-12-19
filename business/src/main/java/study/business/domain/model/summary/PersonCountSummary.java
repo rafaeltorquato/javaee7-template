@@ -1,4 +1,4 @@
-package study.business.domain.model.person;
+package study.business.domain.model.summary;
 
 import lombok.Getter;
 import lombok.Setter;

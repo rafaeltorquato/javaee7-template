@@ -17,10 +17,30 @@ public class LogInterceptor {
     @AroundInvoke
     public Object aroundInvoke(InvocationContext invocationContext) throws Exception {
         String simpleName = invocationContext.getTarget().getClass().getSimpleName();
-        log.info("Executing  method {}::{}", simpleName, invocationContext.getMethod().getName());
+        String parameters = getParameters(invocationContext);
+
+        log.info("Executing  method {}::{}({})", simpleName, invocationContext.getMethod().getName(), parameters);
         Object result = invocationContext.proceed();
-        log.info("Method {}::{} executed!", simpleName,invocationContext.getMethod().getName());
+        log.info("Method {}::{}({}) executed!", simpleName, invocationContext.getMethod().getName(), parameters);
         return result;
+    }
+
+    private String getParameters(InvocationContext invocationContext) {
+        StringBuilder sb = new StringBuilder();
+        Object[] parametersValue = invocationContext.getParameters();
+        if (parametersValue != null) {
+            String comma = "";
+            for (int i = 0; i < parametersValue.length; i++) {
+                Object o = parametersValue[i];
+                sb
+                        .append(comma)
+                        .append(o.getClass().getSimpleName())
+                        .append(":")
+                        .append(o);
+                comma = ",";
+            }
+        }
+        return sb.toString();
     }
 
 }

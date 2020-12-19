@@ -1,7 +1,7 @@
 package study.business.infrastructure.jpa;
 
-import study.business.domain.model.person.PersonCountSummary;
-import study.business.domain.model.person.PersonCountSummaryDao;
+import study.business.domain.model.summary.PersonCountSummary;
+import study.business.domain.model.summary.PersonCountSummaryDao;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;

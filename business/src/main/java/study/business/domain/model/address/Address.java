@@ -33,6 +33,7 @@ public class Address implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     @NotEmpty
     @Column(length = 1000, nullable = false)
     private String value;

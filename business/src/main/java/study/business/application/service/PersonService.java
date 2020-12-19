@@ -1,5 +1,6 @@
 package study.business.application.service;
 
+import lombok.ToString;
 import study.business.domain.model.person.Person;
 
 import javax.ejb.Local;
@@ -18,11 +19,12 @@ public interface PersonService {
 
     List<Person> list();
 
+    @ToString(of = {"name", "surname", "email"})
     class NewPersonCommand {
 
         private String name;
-        private String email;
         private String surname;
+        private String email;
         private Date birthDate;
 
         public String getName() {
@@ -58,6 +60,7 @@ public interface PersonService {
         }
     }
 
+    @ToString(of = {"id"}, callSuper = true)
     class EditPersonCommand extends NewPersonCommand {
         private Long id;
 

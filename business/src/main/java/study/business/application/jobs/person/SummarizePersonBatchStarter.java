@@ -28,7 +28,7 @@ public class SummarizePersonBatchStarter {
                 .dayOfMonth("*")
                 .hour("*")
                 .minute("*")
-                .second("*/5");
+                .second("*/30");
         TimerConfig timerConfig = new TimerConfig();
         timerConfig.setInfo("Send Person Daily Summary.");
         timerService.createCalendarTimer(expression, timerConfig);

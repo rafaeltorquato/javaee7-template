@@ -1,7 +1,7 @@
 package study.business.application.jobs.person;
 
-import study.business.domain.model.person.PersonCountSummary;
-import study.business.domain.model.person.PersonCountSummaryDao;
+import study.business.domain.model.summary.PersonCountSummary;
+import study.business.domain.model.summary.PersonCountSummaryDao;
 
 import javax.batch.api.chunk.ItemWriter;
 import javax.ejb.EJB;

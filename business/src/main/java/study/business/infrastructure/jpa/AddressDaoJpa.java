@@ -4,11 +4,14 @@ import study.business.domain.model.Address;
 import study.business.domain.model.AddressDao;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+@TransactionAttribute(TransactionAttributeType.MANDATORY)
 @Stateless
 public class AddressDaoJpa implements AddressDao {
 

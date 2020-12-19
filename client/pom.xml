@@ -14,6 +14,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
@@ -32,6 +37,28 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <configuration>
+                    <wsdlDirectory>${project.basedir}/src/main/resources/wsdl</wsdlDirectory>
+                    <packageName>study.client.jaxws</packageName>
+                    <keep>true</keep>
+                    <sourceDestDir>${project.build.directory}/generated/src/main/java</sourceDestDir>
+                    <wsdlFiles>
+                        <wsdlFile>PersonJaxWsEndpoint.wsdl</wsdlFile>
+                    </wsdlFiles>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-stubs</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

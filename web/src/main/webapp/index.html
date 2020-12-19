@@ -36,7 +36,7 @@
                 obj.birthDate = new Date();
                 console.log("Sending...")
                 addWS.send(JSON.stringify(obj));
-            }, 2000)
+            }, 10)
         }
 
         addWS.onclose = function (event) {

@@ -11,7 +11,7 @@
 
 <!--    <servlet>-->
 <!--        <servlet-name>PersonServlet</servlet-name>-->
-<!--        <servlet-class>study.web.person.web.PersonServlet</servlet-class>-->
+<!--        <servlet-class>study.web.person.servlet.PersonServlet</servlet-class>-->
 <!--    </servlet>-->
 <!--    <servlet-mapping>-->
 <!--        <servlet-name>PersonServlet</servlet-name>-->

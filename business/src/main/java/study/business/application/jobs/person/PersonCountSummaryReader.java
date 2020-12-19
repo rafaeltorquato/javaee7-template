@@ -47,6 +47,7 @@ public class PersonCountSummaryReader implements ItemReader {
             checkpoint.next();
             return person;
         } catch (IndexOutOfBoundsException e) {
+            this.checkpoint = new PersonCountSummaryCheckpoint();
             return null;
         }
     }

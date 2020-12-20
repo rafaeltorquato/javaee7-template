@@ -4,11 +4,14 @@ import study.business.domain.model.administrator.Administrator;
 import study.business.domain.model.administrator.AdministratorDao;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 @Stateless
+@TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class AdministratorDaoJpa implements AdministratorDao {
 
     @PersistenceContext

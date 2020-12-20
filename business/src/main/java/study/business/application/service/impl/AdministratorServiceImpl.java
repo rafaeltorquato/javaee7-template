@@ -13,7 +13,6 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +31,7 @@ public class AdministratorServiceImpl implements AdministratorService {
         map.put("torquato", Role.FULL);
         map.put("torquato2", Role.ADDRESS);
         map.put("torquato3", Role.PERSON);
-        for(Map.Entry<String, Role> entry: map.entrySet()) {
+        for (Map.Entry<String, Role> entry : map.entrySet()) {
             String adminName = entry.getKey();
             Administrator admin = administratorDao.findByUsername(adminName);
             if (admin == null) {

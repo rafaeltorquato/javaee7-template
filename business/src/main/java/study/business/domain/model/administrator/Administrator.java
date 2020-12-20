@@ -19,9 +19,9 @@ import java.util.Set;
                         "   a.username = :username"
         )
 })
+@Entity
 @Getter
 @Setter
-@Entity
 public class Administrator {
 
     public static final String FIND_BY_USERNAME = "Administrator.FIND_BY_USERNAME";

@@ -1,7 +1,10 @@
 package study.business.application.service;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import study.business.domain.model.person.Person;
+import study.business.domain.model.person.RelationshipType;
 
 import javax.ejb.Local;
 import javax.validation.constraints.NotNull;
@@ -11,13 +14,17 @@ import java.util.List;
 @Local
 public interface PersonService {
 
-    Person save(NewPersonCommand person);
+    Person save(NewPersonCommand command);
 
-    Person edit(EditPersonCommand person);
+    Person edit(EditPersonCommand command);
 
     void delete(@NotNull Long id);
 
     List<Person> list();
+
+    void addRelationship(AddRelationshipCommand command);
+
+    void addPhone(AddPhoneCommand command);
 
     @ToString(of = {"name", "surname", "email"})
     class NewPersonCommand {
@@ -70,6 +77,37 @@ public interface PersonService {
 
         public void setId(Long id) {
             this.id = id;
+        }
+    }
+
+    @Getter
+    @Setter
+    @ToString
+    class AddPhoneCommand {
+        private Long ownerPersonId;
+        private String countryCode;
+        private String areaCode;
+        private String number;
+    }
+
+    @Getter
+    @Setter
+    @ToString
+    class AddRelationshipCommand {
+        @NotNull
+        private Long sourcePersonId;
+        @NotNull
+        private Long targetPersonId;
+        @NotNull
+        private RelationshipType relationshipType;
+    }
+
+    class PersonNotFoundException extends BusinessException {
+        public PersonNotFoundException() {
+        }
+
+        public PersonNotFoundException(String message) {
+            super(message);
         }
     }
 

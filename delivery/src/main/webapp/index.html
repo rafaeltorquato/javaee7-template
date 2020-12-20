@@ -30,7 +30,7 @@
             setInterval(() => {
                 count++;
                 let obj = {};
-                obj.name = "Rafael" + count;
+                obj.name = ""
                 obj.email = "rafael" + count + "@gmail.com";
                 obj.surname = "Torquato";
                 obj.birthDate = new Date();
@@ -38,6 +38,7 @@
                 addWS.send(JSON.stringify(obj));
             }, 1000)
         }
+        addWS.onmessage = onMessage;
 
         addWS.onclose = function (event) {
             console.log('addWS Closed: ' + JSON.stringify(event));

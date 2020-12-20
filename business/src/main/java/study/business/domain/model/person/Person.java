@@ -29,9 +29,9 @@ import java.util.Set;
                         "   p.id"
         )
 })
+@Entity
 @Getter
 @Setter
-@Entity
 public class Person implements Serializable {
 
     public static final String LIST_ALL = "Person.listAll";

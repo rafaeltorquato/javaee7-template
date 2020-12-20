@@ -8,8 +8,8 @@ import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-@EqualsAndHashCode
 @Embeddable
+@EqualsAndHashCode
 @Getter
 @Setter
 public class RelationshipId implements Serializable {

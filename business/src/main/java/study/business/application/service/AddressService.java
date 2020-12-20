@@ -23,4 +23,13 @@ public interface AddressService {
         private String value;
     }
 
+    class AddressNotFoundException extends BusinessException {
+        public AddressNotFoundException() {
+        }
+
+        public AddressNotFoundException(String message) {
+            super(message);
+        }
+    }
+
 }

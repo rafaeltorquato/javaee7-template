@@ -47,10 +47,10 @@ public class AddressServiceImpl implements AddressService {
         try {
             tx.begin();
             Address address = addressDao.findById(id);
-            if (address != null) {
-                addressDao.delete(address);
-                tx.commit();
-            }
+            if(address == null) throw new AddressNotFoundException();
+
+            addressDao.delete(address);
+            tx.commit();
         } catch (Exception e) {
             try {
                 tx.rollback();

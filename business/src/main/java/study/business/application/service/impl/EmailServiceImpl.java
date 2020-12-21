@@ -57,7 +57,7 @@ public class EmailServiceImpl implements EmailService {
             @Override
             public Boolean call() {
                 try {
-                    Message mimeMessage = new MimeMessage(session);
+                    final Message mimeMessage = new MimeMessage(session);
                     mimeMessage.setFrom(InternetAddress.parse("test@test.com")[0]);
                     mimeMessage.setRecipients(Message.RecipientType.TO,
                             InternetAddress.parse(email, false));

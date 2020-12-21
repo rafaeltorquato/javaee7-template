@@ -15,7 +15,7 @@ import java.util.Set;
 
 @Slf4j
 @ApplicationScoped
-public class GlobalErrorMessageHandler {
+public class GlobalExceptionHandler {
 
     public ErrorMessage handle(Exception exception) {
         Throwable cause = getRootCause(exception);

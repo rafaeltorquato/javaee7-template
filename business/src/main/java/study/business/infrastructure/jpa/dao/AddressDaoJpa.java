@@ -1,4 +1,4 @@
-package study.business.infrastructure.jpa;
+package study.business.infrastructure.jpa.dao;
 
 import study.business.domain.model.address.Address;
 import study.business.domain.model.address.AddressDao;

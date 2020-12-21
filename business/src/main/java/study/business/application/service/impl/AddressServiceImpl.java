@@ -46,7 +46,7 @@ public class AddressServiceImpl implements AddressService {
     public void delete(Long id) {
         try {
             tx.begin();
-            Address address = addressDao.findById(id);
+            final Address address = addressDao.findById(id);
             if(address == null) throw new AddressNotFoundException();
 
             addressDao.delete(address);

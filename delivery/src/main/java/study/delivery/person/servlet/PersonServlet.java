@@ -8,6 +8,7 @@ import study.delivery.person.facade.dto.PersonDTO;
 import javax.inject.Inject;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +19,10 @@ import java.io.IOException;
 import java.util.List;
 
 @Slf4j
+@HttpConstraint(rolesAllowed = {
+        "ADMINISTRATOR",
+        "LIST_PERSON"
+})
 @WebServlet(value = "/servlet/persons", initParams = {@WebInitParam(name = "closed", value = "false")})
 public class PersonServlet extends HttpServlet {
 
@@ -67,13 +72,13 @@ public class PersonServlet extends HttpServlet {
 //
 //            }
 //        });
-        if(closed) {
+        if (closed) {
             //TODO Return message
         }
         log.info("Context path: {}", req.getContextPath());
         log.info("Servlet path: {}", req.getServletPath());
         log.info("Path info: {}", req.getPathInfo());
-        List<PersonDTO> persons =  personFacade.list();
+        List<PersonDTO> persons = personFacade.list();
 //        RequestDispatcher requestDispatcher = req.getRequestDispatcher("");
 //        if(requestDispatcher != null) {
 //            requestDispatcher.include(req, resp);

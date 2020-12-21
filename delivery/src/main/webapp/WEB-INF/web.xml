@@ -4,5 +4,30 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+<!--    <security-constraint>-->
+<!--        <web-resource-collection>-->
+<!--            <web-resource-name></web-resource-name>-->
+<!--            <url-pattern></url-pattern>-->
+<!--            <http-method>PUT</http-method>-->
+<!--            <http-method>GET</http-method>-->
+<!--        </web-resource-collection>-->
+<!--        <auth-constraint>-->
+<!--            <role-name>ADMINISTRATOR</role-name>-->
+<!--        </auth-constraint>-->
+<!--        <user-data-constraint>-->
+<!--            <transport-guarantee>CONFIDENTIAL</transport-guarantee>-->
+<!--        </user-data-constraint>-->
+<!--    </security-constraint>-->
+<!--    <security-role>-->
+<!--        <role-name>ADMINISTRATOR</role-name>-->
+<!--    </security-role>-->
 
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name></realm-name>
+        <form-login-config>
+            <form-login-page>/login.jsp</form-login-page>
+            <form-error-page>/login-failed.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
 </web-app>

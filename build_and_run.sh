@@ -1,2 +1,2 @@
 #!/bin/bash
-mvn package && ./run.sh
+mvn clean package && ./run.sh

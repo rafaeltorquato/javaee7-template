@@ -1,10 +1,11 @@
 package study.delivery.person.wsocket;
 
+import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import study.delivery.person.facade.PersonFacade;
 import study.delivery.person.facade.dto.NewPersonCommandDTO;
 import study.delivery.person.facade.dto.PersonDTO;
-import study.delivery.util.GlobalErrorMessageHandler;
+import study.delivery.util.GlobalExceptionHandler;
 
 import javax.inject.Inject;
 import javax.websocket.EncodeException;
@@ -27,23 +28,30 @@ public class AddPersonEndpoint {
     @Inject
     private SharedSessions sharedSessions;
     @Inject
-    private GlobalErrorMessageHandler globalErrorMessageHandler;
-
+    private GlobalExceptionHandler globalExceptionHandler;
+    @Inject
+    private Gson gson;
 
     @OnMessage
     public void onMessage(Session session, NewPersonCommandDTO message) {
         log.info("Message received!");
         try {
             PersonDTO saved = personFacade.save(message);
+            session.getBasicRemote().sendObject(gson.toJson(saved));
         } catch (Exception exception) {
-            GlobalErrorMessageHandler.ErrorMessage errorMessage = globalErrorMessageHandler.handle(exception);
+            GlobalExceptionHandler.ErrorMessage errorMessage = globalExceptionHandler.handle(exception);
             try {
                 session.getBasicRemote().sendObject(errorMessage);
             } catch (IOException | EncodeException e) {
                 log.error(e.getMessage(), e);
             }
         }
+        sendToAll();
+    }
+
+    private void sendToAll() {
         //Send to all sessions a new Person
+        //TODO Best way todo this is with a topic by sent the message to all nodes.
         final List<Session> openedSessions = sharedSessions.getListSessions();
         for (Session s : openedSessions) {
             try {

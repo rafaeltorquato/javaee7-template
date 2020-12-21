@@ -1,4 +1,4 @@
-package study.business.infrastructure.jpa;
+package study.business.infrastructure.jpa.dao;
 
 import study.business.domain.model.summary.PersonCountSummary;
 import study.business.domain.model.summary.PersonCountSummaryDao;

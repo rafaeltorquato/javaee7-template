@@ -1,30 +1,30 @@
 package study.business.application.service.impl;
 
-import study.business.application.event.PersonDeletedEvent;
+import lombok.extern.slf4j.Slf4j;
 import study.business.application.service.PersonService;
 import study.business.domain.model.person.*;
 import study.components.interceptor.Logged;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.enterprise.event.Event;
-import javax.inject.Inject;
 import java.util.List;
 
+@Slf4j
 @Logged
 @Stateless
 public class PersonServiceImpl implements PersonService {
 
     @EJB
     private PersonDao personDao;
-    @Inject
-    private Event<PersonDeletedEvent> personDeletedEvent;
+    @EJB
+    private PersonRecipient personRecipient;
 
     @Override
     public Person save(NewPersonCommand command) {
         final Person person = new Person();
         setPerson(command, person);
         this.personDao.save(person);
+        personRecipient.notify(new PersonSavedEvent(person));
         return person;
     }
 
@@ -39,11 +39,11 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public void delete(Long id) {
-        Person person = personDao.findById(id);
+        final Person person = personDao.findById(id);
         if (person == null) throw new PersonNotFoundException();
 
         personDao.delete(person);
-        personDeletedEvent.fire(new PersonDeletedEvent(id));
+        personRecipient.notify(new PersonDeletedEvent(person));
     }
 
     @Override
@@ -53,11 +53,11 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public void addRelationship(AddRelationshipCommand command) {
-        Person source = personDao.findById(command.getSourcePersonId());
+        final Person source = personDao.findById(command.getSourcePersonId());
         if (source == null) throw new PersonNotFoundException("Source person not found!");
-        Person target = personDao.findById(command.getTargetPersonId());
+        final Person target = personDao.findById(command.getTargetPersonId());
         if (target == null) throw new PersonNotFoundException("Target person not found!");
-        Relationship relationship = new Relationship(
+        final Relationship relationship = new Relationship(
                 source,
                 target,
                 command.getRelationshipType()
@@ -68,10 +68,10 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public void addPhone(AddPhoneCommand command) {
-        Person owner = personDao.findById(command.getOwnerPersonId());
+        final Person owner = personDao.findById(command.getOwnerPersonId());
         if (owner == null) throw new PersonNotFoundException();
 
-        Phone phone = new Phone();
+        final Phone phone = new Phone();
         phone.setOwner(owner);
         phone.setAreaCode(command.getAreaCode());
         phone.setNumber(command.getNumber());

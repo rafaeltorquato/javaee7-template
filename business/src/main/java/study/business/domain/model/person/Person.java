@@ -37,7 +37,7 @@ public class Person implements Serializable {
     public static final String LIST_ALL = "Person.listAll";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(nullable = false)
     private Long id;
     @Valid

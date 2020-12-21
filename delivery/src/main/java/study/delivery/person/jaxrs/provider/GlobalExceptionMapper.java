@@ -1,6 +1,6 @@
 package study.delivery.person.jaxrs.provider;
 
-import study.delivery.util.GlobalErrorMessageHandler;
+import study.delivery.util.GlobalExceptionHandler;
 
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
@@ -11,11 +11,11 @@ import javax.ws.rs.ext.Provider;
 public class GlobalExceptionMapper implements ExceptionMapper<Exception> {
 
     @Inject
-    private GlobalErrorMessageHandler globalErrorMessageHandler;
+    private GlobalExceptionHandler globalExceptionHandler;
 
     @Override
     public Response toResponse(Exception exception) {
-        GlobalErrorMessageHandler.ErrorMessage errorMessage = globalErrorMessageHandler.handle(exception);
+        GlobalExceptionHandler.ErrorMessage errorMessage = globalExceptionHandler.handle(exception);
         return Response.status(errorMessage.getCode())
                 .entity(errorMessage)
                 .build();

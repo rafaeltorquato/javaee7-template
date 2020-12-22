@@ -15,6 +15,8 @@ import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
 import java.util.*;
 
+import static study.business.domain.model.user.Role.*;
+
 @Logged
 @Startup
 @Singleton
@@ -27,9 +29,9 @@ public class UserServiceImpl implements UserService {
     @SneakyThrows
     public void init() {
         final Map<String, Set<Role>> map = new HashMap<>();
-        map.put("torquato", new HashSet<>(Collections.singletonList(Role.ADMINISTRATOR)));
-        map.put("torquato2", new HashSet<>(Arrays.asList(Role.ADD_ADDRESS, Role.LIST_ADDRESS, Role.DELETE_ADDRESS)));
-        map.put("torquato3", new HashSet<>(Arrays.asList(Role.ADD_PERSON, Role.DELETE_PERSON, Role.LIST_PERSON)));
+        map.put("torquato", new HashSet<>(Arrays.asList(AUTHENTICATED, ADMINISTRATOR)));
+        map.put("torquato2", new HashSet<>(Arrays.asList(AUTHENTICATED, ADD_ADDRESS, LIST_ADDRESS, DELETE_ADDRESS)));
+        map.put("torquato3", new HashSet<>(Arrays.asList(AUTHENTICATED, ADD_PERSON, DELETE_PERSON, LIST_PERSON)));
         for (Map.Entry<String, Set<Role>> entry : map.entrySet()) {
             final String adminName = entry.getKey();
             User admin = userDao.findByUsername(adminName);

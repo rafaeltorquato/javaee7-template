@@ -21,7 +21,19 @@
         </dependency>
         <dependency>
             <groupId>study</groupId>
-            <artifactId>delivery</artifactId>
+            <artifactId>facade</artifactId>
+            <type>ejb</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>study</groupId>
+            <artifactId>ws-api</artifactId>
+            <type>war</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>study</groupId>
+            <artifactId>view</artifactId>
             <type>war</type>
             <scope>compile</scope>
         </dependency>

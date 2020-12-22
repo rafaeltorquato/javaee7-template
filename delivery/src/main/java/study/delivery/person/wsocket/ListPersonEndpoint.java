@@ -13,7 +13,7 @@ import java.util.List;
 
 @Slf4j
 @ServerEndpoint(
-        value = "/socket/persons/list",
+        value = "/secure/socket/persons/list",
         encoders = {PersonDTOJsonEncoder.class, PersonDTOJsonArrayEncoder.class},
         decoders = {NewPersonCommandDTOJsonDecoder.class}
 )

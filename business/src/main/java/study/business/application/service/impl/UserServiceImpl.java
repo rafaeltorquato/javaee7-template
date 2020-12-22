@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
                 final MessageDigest md = MessageDigest.getInstance("MD5");
                 md.update("123456".getBytes());
                 final byte[] digest = md.digest();
-                final String password = DatatypeConverter.printHexBinary(digest).toUpperCase();
+                final String password = DatatypeConverter.printBase64Binary(digest);
                 admin.setPassword(password);
                 userDao.save(admin);
             }

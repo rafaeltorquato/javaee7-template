@@ -20,7 +20,7 @@ public class Group {
     private String name;
     @Enumerated(EnumType.STRING)
     @ElementCollection
-    @CollectionTable(name = "AuthGropuRoles")
+    @CollectionTable(name = "AuthGroupRoles")
     private Set<Role> roles = new HashSet<>();
 
 }

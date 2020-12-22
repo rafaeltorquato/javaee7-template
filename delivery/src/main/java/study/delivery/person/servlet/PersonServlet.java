@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,11 +20,8 @@ import java.io.IOException;
 import java.util.List;
 
 @Slf4j
-@HttpConstraint(rolesAllowed = {
-        "ADMINISTRATOR",
-        "LIST_PERSON"
-})
-@WebServlet(value = "/servlet/persons", initParams = {@WebInitParam(name = "closed", value = "false")})
+@ServletSecurity(@HttpConstraint(rolesAllowed = {"ADMINISTRATOR", "LIST_PERSON"}))
+@WebServlet(value = "/secure/servlet/persons", initParams = {@WebInitParam(name = "closed", value = "false")})
 public class PersonServlet extends HttpServlet {
 
     private Boolean closed;

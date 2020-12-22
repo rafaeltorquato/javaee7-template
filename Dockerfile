@@ -1,6 +1,6 @@
 FROM jboss/wildfly:21.0.1.Final
 
-COPY prepare-wildfly.sh /opt/jboss/prepare.sh
+COPY prepare-wildfly.sh /opt/jboss/prepare-wildfly.sh
 
 RUN cd /opt/jboss/ && ./prepare-wildfly.sh
 

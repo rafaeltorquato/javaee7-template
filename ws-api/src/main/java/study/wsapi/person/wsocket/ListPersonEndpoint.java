@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import study.facade.person.PersonFacade;
 import study.facade.person.dto.PersonDTO;
 
-import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
@@ -20,19 +19,14 @@ import java.util.List;
 )
 public class ListPersonEndpoint {
 
-
-    @EJB
+    @Inject
     private PersonFacade personFacade;
     @Inject
     private SharedSessions sharedSessions;
 
-    private Session session;
-
     @OnOpen
     public void open(Session session, EndpointConfig conf) {
-        this.session = session;
         sharedSessions.getListSessions().add(session);
-
     }
 
     @OnMessage

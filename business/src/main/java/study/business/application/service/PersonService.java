@@ -22,13 +22,13 @@ public interface PersonService {
 
     List<Person> list();
 
-    void saveRelationship(NewRelationshipCommand command);
+    Person saveRelationship(SaveRelationshipCommand command);
 
-    void deleteRelationship(DeleteRelationshipCommand command);
+    Person deleteRelationship(DeleteRelationshipCommand command);
 
-    void savePhone(SavePhoneCommand command);
+    Person savePhone(SavePhoneCommand command);
 
-    void deletePhone(DeletePhoneCommand command);
+    Person deletePhone(DeletePhoneCommand command);
 
     @ToString(of = {"name", "surname", "email"})
     class NewPersonCommand {
@@ -97,12 +97,9 @@ public interface PersonService {
     @Getter
     @Setter
     @ToString
-    class NewRelationshipCommand {
-        @NotNull
+    class SaveRelationshipCommand {
         private Long sourcePersonId;
-        @NotNull
         private Long targetPersonId;
-        @NotNull
         private RelationshipType relationshipType;
     }
 
@@ -118,7 +115,7 @@ public interface PersonService {
     @Setter
     @ToString
     class DeletePhoneCommand {
-        private Long personId;
+        private Long ownerPersonId;
         private Long phoneId;
     }
 

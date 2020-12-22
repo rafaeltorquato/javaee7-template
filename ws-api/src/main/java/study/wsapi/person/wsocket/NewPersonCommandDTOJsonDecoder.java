@@ -10,7 +10,7 @@ import javax.websocket.EndpointConfig;
 
 public class NewPersonCommandDTOJsonDecoder implements Decoder.Text<NewPersonCommandDTO> {
 
-    private final Gson gson = GsonProducer.create();
+    private Gson gson;
 
     @Override
     public NewPersonCommandDTO decode(String s) throws DecodeException {
@@ -24,6 +24,7 @@ public class NewPersonCommandDTOJsonDecoder implements Decoder.Text<NewPersonCom
 
     @Override
     public void init(EndpointConfig config) {
+        this.gson = GsonProducer.create();
     }
 
     @Override

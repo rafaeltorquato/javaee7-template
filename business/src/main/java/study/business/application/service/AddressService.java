@@ -12,9 +12,9 @@ import java.util.List;
 @Local
 public interface AddressService {
 
-    void save(NewAddressCommand command);
+    Address save(NewAddressCommand command);
 
-    void edit(EditAddressCommand command);
+    Address edit(EditAddressCommand command);
 
     void delete(@NotNull Long id);
 

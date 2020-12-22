@@ -10,7 +10,7 @@ import javax.websocket.EndpointConfig;
 
 public class PersonDTOJsonEncoder implements Encoder.Text<PersonDTO> {
 
-    private final Gson gson = GsonProducer.create();
+    private Gson gson;
 
     @Override
     public String encode(PersonDTO object) throws EncodeException {
@@ -18,8 +18,11 @@ public class PersonDTOJsonEncoder implements Encoder.Text<PersonDTO> {
     }
 
     @Override
-    public void init(EndpointConfig config) { }
+    public void init(EndpointConfig config) {
+        this.gson = GsonProducer.create();
+    }
 
     @Override
-    public void destroy() { }
+    public void destroy() {
+    }
 }

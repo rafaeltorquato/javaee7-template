@@ -5,9 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import study.business.application.service.PersonService;
 import study.business.domain.model.person.Person;
-import study.facade.person.dto.EditPersonCommandDTO;
-import study.facade.person.dto.NewPersonCommandDTO;
-import study.facade.person.dto.PersonDTO;
+import study.facade.person.dto.*;
 
 import java.util.List;
 
@@ -25,5 +23,13 @@ public interface PersonMapper {
     PersonService.NewPersonCommand fromDTO(NewPersonCommandDTO dto);
 
     PersonService.EditPersonCommand fromDTO(EditPersonCommandDTO dto);
+
+    PersonService.SaveRelationshipCommand fromDTO(SaveRelationshipCommandDTO dto);
+
+    PersonService.DeleteRelationshipCommand fromDTO(DeleteRelationshipCommandDTO dto);
+
+    PersonService.SavePhoneCommand fromDTO(SavePhoneCommandDTO dto);
+
+    PersonService.DeletePhoneCommand fromDTO(DeletePhoneCommandDTO dto);
 
 }

@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -30,5 +32,20 @@ public class PersonDTO implements Serializable {
     private Date registerDateTime;
     @XmlElement
     private Integer version;
-    
+    @XmlElement
+    private Set<PhoneDTO> phones = new HashSet<>();
+    @XmlElement
+    private Set<RelationshipDTO> relationships = new HashSet<>();
+
+    public void setRelationships(Set<RelationshipDTO> relationships) {
+        if(relationships != null) {
+            this.relationships = relationships;
+        }
+    }
+
+    public void setPhones(Set<PhoneDTO> phones) {
+        if(phones != null) {
+            this.phones = phones;
+        }
+    }
 }

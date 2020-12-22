@@ -11,7 +11,7 @@ import java.util.List;
 
 public class PersonDTOJsonArrayEncoder implements Encoder.Text<List<PersonDTO>> {
 
-    private final Gson gson = GsonProducer.create();
+    private Gson gson;
 
     @Override
     public String encode(List<PersonDTO> object) throws EncodeException {
@@ -19,8 +19,11 @@ public class PersonDTOJsonArrayEncoder implements Encoder.Text<List<PersonDTO>> 
     }
 
     @Override
-    public void init(EndpointConfig config) { }
+    public void init(EndpointConfig config) {
+        this.gson = GsonProducer.create();
+    }
 
     @Override
-    public void destroy() { }
+    public void destroy() {
+    }
 }

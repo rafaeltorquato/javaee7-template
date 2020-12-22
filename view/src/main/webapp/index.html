@@ -12,7 +12,7 @@
 
     function connect() {
         console.log("connect()");
-        listWS = new WebSocket("ws://localhost:8080/delivery/secure/socket/persons/list");
+        listWS = new WebSocket("ws://localhost:8080/ws-api/socket/persons/list");
         listWS.onmessage = onMessage;
         listWS.onopen = function (event) {
             console.log('Open: ' + JSON.stringify(event));
@@ -24,7 +24,7 @@
             console.log('listWS Closed: ' + JSON.stringify(event));
         }
 
-        addWS = new WebSocket("ws://localhost:8080/delivery/secure/socket/persons/add");
+        addWS = new WebSocket("ws://localhost:8080/ws-api/socket/persons/add");
         addWS.onopen = function (event) {
             let count = 0;
             setInterval(() => {

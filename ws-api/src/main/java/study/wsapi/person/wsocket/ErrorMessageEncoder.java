@@ -10,16 +10,16 @@ import javax.websocket.EndpointConfig;
 
 public class ErrorMessageEncoder implements Encoder.Text<GlobalExceptionHandler.ErrorMessage> {
 
+    private Gson gson;
 
     @Override
     public String encode(GlobalExceptionHandler.ErrorMessage object) throws EncodeException {
-        Gson gson = GsonProducer.create();
         return gson.toJson(object);
     }
 
     @Override
     public void init(EndpointConfig config) {
-
+        this.gson = GsonProducer.create();
     }
 
     @Override

@@ -7,7 +7,7 @@ import study.facade.person.dto.NewPersonCommandDTO;
 import study.facade.person.dto.PersonDTO;
 import study.wsapi.util.GlobalExceptionHandler;
 
-import javax.ejb.EJB;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.websocket.EncodeException;
 import javax.websocket.OnMessage;
@@ -24,7 +24,7 @@ import java.util.List;
 )
 public class AddPersonEndpoint {
 
-    @EJB
+    @Inject
     private PersonFacade personFacade;
     @Inject
     private SharedSessions sharedSessions;
@@ -34,6 +34,7 @@ public class AddPersonEndpoint {
     private Gson gson;
 
     @OnMessage
+    @RolesAllowed("ADMINISTRATOR")
     public void onMessage(Session session, NewPersonCommandDTO message) {
         log.info("Message received!");
         try {

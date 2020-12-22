@@ -13,8 +13,8 @@
     </security-role>
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>Global</web-resource-name>
-            <url-pattern>/*</url-pattern>
+            <web-resource-name>Global Security</web-resource-name>
+            <url-pattern>*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>AUTHENTICATED</role-name>

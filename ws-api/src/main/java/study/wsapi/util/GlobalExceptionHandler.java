@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import study.facade.exception.FacadeBusinessException;
 
+import javax.ejb.EJBAccessException;
 import javax.enterprise.context.ApplicationScoped;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -28,6 +29,8 @@ public class GlobalExceptionHandler {
             builder.code(Response.Status.BAD_REQUEST.getStatusCode());
             List<ErrorMessage> errors = extractErrors((ConstraintViolationException) cause);
             builder.children(errors);
+        } else if (cause instanceof EJBAccessException) {
+            builder.code(Response.Status.FORBIDDEN.getStatusCode());
         } else {
             log.error(cause.getMessage(), exception);
         }

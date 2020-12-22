@@ -27,39 +27,35 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     @RolesAllowed({"ADMINISTRATOR", "SAVE_ADDRESS"})
-    public void save(NewAddressCommand command) {
+    public Address save(NewAddressCommand command) {
         try {
             tx.begin();
             final Address address = new Address();
             address.setValue(command.getValue());
             addressDao.save(address);
             tx.commit();
+            return address;
         } catch (Exception e) {
-            try {
-                tx.rollback();
-            } catch (SystemException systemException) {
-                throw new RuntimeException(systemException);
-            }
+            rollback(e);
+            return null; //this never happen
         }
     }
 
     @Override
     @RolesAllowed({"ADMINISTRATOR", "EDIT_ADDRESS"})
-    public void edit(EditAddressCommand command) {
+    public Address edit(EditAddressCommand command) {
         try {
             tx.begin();
             final Address address = addressDao.findById(command.getId());
-            if(address == null) throw new AddressNotFoundException();
+            if (address == null) throw new AddressNotFoundException();
 
             address.setValue(command.getValue());
             addressDao.save(address);
             tx.commit();
+            return address;
         } catch (Exception e) {
-            try {
-                tx.rollback();
-            } catch (SystemException systemException) {
-                throw new RuntimeException(systemException);
-            }
+            rollback(e);
+            return null; //this never happen
         }
     }
 
@@ -69,7 +65,7 @@ public class AddressServiceImpl implements AddressService {
         try {
             tx.begin();
             final Address address = addressDao.findById(id);
-            if(address == null) throw new AddressNotFoundException();
+            if (address == null) throw new AddressNotFoundException();
 
             addressDao.delete(address);
             tx.commit();
@@ -87,11 +83,12 @@ public class AddressServiceImpl implements AddressService {
             tx.commit();
             return list;
         } catch (Exception e) {
-            return rollback(e);
+            rollback(e);
+            return null; //this never happen
         }
     }
 
-    private List<Address> rollback(Exception e) {
+    private void rollback(Exception e) {
         try {
             tx.rollback();
             throw new RuntimeException(e);

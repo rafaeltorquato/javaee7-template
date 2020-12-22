@@ -59,7 +59,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     @RolesAllowed({"ADMINISTRATOR", "EDIT_PERSON"})
-    public void saveRelationship(NewRelationshipCommand command) {
+    public Person saveRelationship(SaveRelationshipCommand command) {
         final Person source = personDao.findById(command.getSourcePersonId());
         if (source == null) throw new PersonNotFoundException("Source person not found!");
         final Person target = personDao.findById(command.getTargetPersonId());
@@ -71,11 +71,12 @@ public class PersonServiceImpl implements PersonService {
         );
         source.getRelationships().add(relationship);
         personDao.save(source);
+        return source;
     }
 
     @Override
     @RolesAllowed({"ADMINISTRATOR", "EDIT_PERSON"})
-    public void deleteRelationship(DeleteRelationshipCommand command) {
+    public Person deleteRelationship(DeleteRelationshipCommand command) {
         final Person source = personDao.findById(command.getSourcePersonId());
         if (source == null) throw new PersonNotFoundException("Source person not found!");
 
@@ -85,7 +86,7 @@ public class PersonServiceImpl implements PersonService {
             if(relationship.getTarget().getId().equals(command.getTargetPersonId())) {
                 iterator.remove();
                 personDao.save(source);
-                return;
+                return source;
             }
         }
 
@@ -94,7 +95,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     @RolesAllowed({"ADMINISTRATOR", "EDIT_PERSON"})
-    public void savePhone(SavePhoneCommand command) {
+    public Person savePhone(SavePhoneCommand command) {
         final Person owner = personDao.findById(command.getOwnerPersonId());
         if (owner == null) throw new PersonNotFoundException();
 
@@ -105,21 +106,23 @@ public class PersonServiceImpl implements PersonService {
         phone.setCountryCode(command.getCountryCode());
         owner.getPhones().add(phone);
         personDao.save(owner);
+
+        return owner;
     }
 
     @Override
     @RolesAllowed({"ADMINISTRATOR", "EDIT_PERSON"})
-    public void deletePhone(DeletePhoneCommand command) {
-        final Person person = personDao.findById(command.getPersonId());
-        if (person == null) throw new PersonNotFoundException();
+    public Person deletePhone(DeletePhoneCommand command) {
+        final Person owner = personDao.findById(command.getOwnerPersonId());
+        if (owner == null) throw new PersonNotFoundException();
 
-        final Iterator<Phone> iterator = person.getPhones().iterator();
+        final Iterator<Phone> iterator = owner.getPhones().iterator();
         while(iterator.hasNext()) {
             Phone phone = iterator.next();
             if(phone.getId().equals(command.getPhoneId())) {
                 iterator.remove();
-                personDao.save(person);
-                return;
+                personDao.save(owner);
+                return owner;
             }
         }
 

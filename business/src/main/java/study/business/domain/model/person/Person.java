@@ -22,7 +22,8 @@ import java.util.Set;
                         "from " +
                         "   Person p " +
                         "left join fetch p.phones " +
-                        "left join fetch p.relationships " +
+                        "left join fetch p.relationships r " +
+                        "left join fetch r.target " +
                         "left join fetch p.addresses " +
                         "order by " +
                         "   p.registerDateTime, " +

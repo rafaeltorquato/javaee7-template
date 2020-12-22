@@ -22,9 +22,13 @@ public interface PersonService {
 
     List<Person> list();
 
-    void addRelationship(AddRelationshipCommand command);
+    void saveRelationship(NewRelationshipCommand command);
 
-    void addPhone(AddPhoneCommand command);
+    void deleteRelationship(DeleteRelationshipCommand command);
+
+    void savePhone(SavePhoneCommand command);
+
+    void deletePhone(DeletePhoneCommand command);
 
     @ToString(of = {"name", "surname", "email"})
     class NewPersonCommand {
@@ -83,7 +87,7 @@ public interface PersonService {
     @Getter
     @Setter
     @ToString
-    class AddPhoneCommand {
+    class SavePhoneCommand {
         private Long ownerPersonId;
         private String countryCode;
         private String areaCode;
@@ -93,7 +97,7 @@ public interface PersonService {
     @Getter
     @Setter
     @ToString
-    class AddRelationshipCommand {
+    class NewRelationshipCommand {
         @NotNull
         private Long sourcePersonId;
         @NotNull
@@ -102,11 +106,45 @@ public interface PersonService {
         private RelationshipType relationshipType;
     }
 
+    @Getter
+    @Setter
+    @ToString
+    class DeleteRelationshipCommand {
+        private Long sourcePersonId;
+        private Long targetPersonId;
+    }
+
+    @Getter
+    @Setter
+    @ToString
+    class DeletePhoneCommand {
+        private Long personId;
+        private Long phoneId;
+    }
+
     class PersonNotFoundException extends BusinessException {
         public PersonNotFoundException() {
         }
 
         public PersonNotFoundException(String message) {
+            super(message);
+        }
+    }
+
+    class RelationshipNotFound extends BusinessException {
+        public RelationshipNotFound() {
+        }
+
+        public RelationshipNotFound(String message) {
+            super(message);
+        }
+    }
+
+    class PhoneNotFound extends BusinessException {
+        public PhoneNotFound() {
+        }
+
+        public PhoneNotFound(String message) {
             super(message);
         }
     }

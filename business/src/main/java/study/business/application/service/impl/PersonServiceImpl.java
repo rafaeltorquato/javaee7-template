@@ -5,8 +5,10 @@ import study.business.application.service.PersonService;
 import study.business.domain.model.person.*;
 import study.components.interceptor.Logged;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import java.util.Iterator;
 import java.util.List;
 
 @Slf4j
@@ -20,6 +22,7 @@ public class PersonServiceImpl implements PersonService {
     private PersonRecipient personRecipient;
 
     @Override
+    @RolesAllowed({"ADMINISTRATOR", "SAVE_PERSON"})
     public Person save(NewPersonCommand command) {
         final Person person = new Person();
         setPerson(command, person);
@@ -29,6 +32,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    @RolesAllowed({"ADMINISTRATOR", "EDIT_PERSON"})
     public Person edit(EditPersonCommand command) {
         final Person person = personDao.findById(command.getId());
         if (person == null) throw new PersonNotFoundException();
@@ -38,6 +42,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    @RolesAllowed({"ADMINISTRATOR", "DELETE_PERSON"})
     public void delete(Long id) {
         final Person person = personDao.findById(id);
         if (person == null) throw new PersonNotFoundException();
@@ -47,12 +52,14 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    @RolesAllowed({"ADMINISTRATOR", "LIST_PERSON"})
     public List<Person> list() {
         return personDao.list();
     }
 
     @Override
-    public void addRelationship(AddRelationshipCommand command) {
+    @RolesAllowed({"ADMINISTRATOR", "EDIT_PERSON"})
+    public void saveRelationship(NewRelationshipCommand command) {
         final Person source = personDao.findById(command.getSourcePersonId());
         if (source == null) throw new PersonNotFoundException("Source person not found!");
         final Person target = personDao.findById(command.getTargetPersonId());
@@ -67,7 +74,27 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void addPhone(AddPhoneCommand command) {
+    @RolesAllowed({"ADMINISTRATOR", "EDIT_PERSON"})
+    public void deleteRelationship(DeleteRelationshipCommand command) {
+        final Person source = personDao.findById(command.getSourcePersonId());
+        if (source == null) throw new PersonNotFoundException("Source person not found!");
+
+        final Iterator<Relationship> iterator = source.getRelationships().iterator();
+        while(iterator.hasNext()) {
+            final Relationship relationship = iterator.next();
+            if(relationship.getTarget().getId().equals(command.getTargetPersonId())) {
+                iterator.remove();
+                personDao.save(source);
+                return;
+            }
+        }
+
+        throw new RelationshipNotFound();
+    }
+
+    @Override
+    @RolesAllowed({"ADMINISTRATOR", "EDIT_PERSON"})
+    public void savePhone(SavePhoneCommand command) {
         final Person owner = personDao.findById(command.getOwnerPersonId());
         if (owner == null) throw new PersonNotFoundException();
 
@@ -78,6 +105,25 @@ public class PersonServiceImpl implements PersonService {
         phone.setCountryCode(command.getCountryCode());
         owner.getPhones().add(phone);
         personDao.save(owner);
+    }
+
+    @Override
+    @RolesAllowed({"ADMINISTRATOR", "EDIT_PERSON"})
+    public void deletePhone(DeletePhoneCommand command) {
+        final Person person = personDao.findById(command.getPersonId());
+        if (person == null) throw new PersonNotFoundException();
+
+        final Iterator<Phone> iterator = person.getPhones().iterator();
+        while(iterator.hasNext()) {
+            Phone phone = iterator.next();
+            if(phone.getId().equals(command.getPhoneId())) {
+                iterator.remove();
+                personDao.save(person);
+                return;
+            }
+        }
+
+        throw new PhoneNotFound();
     }
 
     private void setPerson(NewPersonCommand command, Person person) {

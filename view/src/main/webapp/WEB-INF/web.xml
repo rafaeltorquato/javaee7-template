@@ -11,7 +11,7 @@
         <role-name>ADMINISTRATOR</role-name>
     </security-role>
     <security-role>
-        <role-name>ADD_ADDRESS</role-name>
+        <role-name>SAVE_ADDRESS</role-name>
     </security-role>
     <security-role>
         <role-name>DELETE_ADDRESS</role-name>
@@ -20,7 +20,7 @@
         <role-name>LIST_ADDRESS</role-name>
     </security-role>
     <security-role>
-        <role-name>ADD_PERSON</role-name>
+        <role-name>SAVE_PERSON</role-name>
     </security-role>
     <security-role>
         <role-name>DELETE_PERSON</role-name>
@@ -45,7 +45,7 @@
         </web-resource-collection>
         <auth-constraint>
             <role-name>ADMINISTRATOR</role-name>
-            <role-name>ADD_PERSON</role-name>
+            <role-name>SAVE_PERSON</role-name>
             <role-name>DELETE_PERSON</role-name>
             <role-name>LIST_PERSON</role-name>
         </auth-constraint>

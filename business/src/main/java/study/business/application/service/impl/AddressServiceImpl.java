@@ -6,12 +6,14 @@ import study.business.domain.model.address.AddressDao;
 import study.components.interceptor.Logged;
 
 import javax.annotation.Resource;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
+import java.util.List;
 
 @Logged
 @Stateless
@@ -24,14 +26,14 @@ public class AddressServiceImpl implements AddressService {
     private AddressDao addressDao;
 
     @Override
-    public Address newAddress(NewAddressCommand command) {
+    @RolesAllowed({"ADMINISTRATOR", "SAVE_ADDRESS"})
+    public void save(NewAddressCommand command) {
         try {
             tx.begin();
             final Address address = new Address();
             address.setValue(command.getValue());
             addressDao.save(address);
             tx.commit();
-            return address;
         } catch (Exception e) {
             try {
                 tx.rollback();
@@ -39,10 +41,30 @@ public class AddressServiceImpl implements AddressService {
                 throw new RuntimeException(systemException);
             }
         }
-        return null;
     }
 
     @Override
+    @RolesAllowed({"ADMINISTRATOR", "EDIT_ADDRESS"})
+    public void edit(EditAddressCommand command) {
+        try {
+            tx.begin();
+            final Address address = addressDao.findById(command.getId());
+            if(address == null) throw new AddressNotFoundException();
+
+            address.setValue(command.getValue());
+            addressDao.save(address);
+            tx.commit();
+        } catch (Exception e) {
+            try {
+                tx.rollback();
+            } catch (SystemException systemException) {
+                throw new RuntimeException(systemException);
+            }
+        }
+    }
+
+    @Override
+    @RolesAllowed({"ADMINISTRATOR", "DELETE_ADDRESS"})
     public void delete(Long id) {
         try {
             tx.begin();
@@ -52,11 +74,29 @@ public class AddressServiceImpl implements AddressService {
             addressDao.delete(address);
             tx.commit();
         } catch (Exception e) {
-            try {
-                tx.rollback();
-            } catch (SystemException systemException) {
-                throw new RuntimeException(systemException);
-            }
+            rollback(e);
+        }
+    }
+
+    @Override
+    @RolesAllowed({"ADMINISTRATOR", "LIST_ADDRESS"})
+    public List<Address> list() {
+        try {
+            tx.begin();
+            List<Address> list = addressDao.list();
+            tx.commit();
+            return list;
+        } catch (Exception e) {
+            return rollback(e);
+        }
+    }
+
+    private List<Address> rollback(Exception e) {
+        try {
+            tx.rollback();
+            throw new RuntimeException(e);
+        } catch (SystemException systemException) {
+            throw new RuntimeException(systemException);
         }
     }
 }

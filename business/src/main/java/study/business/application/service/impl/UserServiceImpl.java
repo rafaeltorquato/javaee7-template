@@ -30,29 +30,24 @@ public class UserServiceImpl implements UserService {
     public void init() {
         final Map<String, Set<Role>> map = new HashMap<>();
         map.put("torquato", new HashSet<>(Arrays.asList(AUTHENTICATED, ADMINISTRATOR)));
-        map.put("torquato2", new HashSet<>(Arrays.asList(AUTHENTICATED, ADD_ADDRESS, LIST_ADDRESS, DELETE_ADDRESS)));
-        map.put("torquato3", new HashSet<>(Arrays.asList(AUTHENTICATED, ADD_PERSON, DELETE_PERSON, LIST_PERSON)));
+        map.put("torquato2", new HashSet<>(Arrays.asList(AUTHENTICATED, SAVE_ADDRESS, LIST_ADDRESS, DELETE_ADDRESS)));
+        map.put("torquato3", new HashSet<>(Arrays.asList(AUTHENTICATED, SAVE_PERSON, DELETE_PERSON, LIST_PERSON)));
         for (Map.Entry<String, Set<Role>> entry : map.entrySet()) {
-            final String adminName = entry.getKey();
-            User admin = userDao.findByUsername(adminName);
-            if (admin == null) {
-                admin = new User();
-                admin.getRoles().addAll(entry.getValue());
-                admin.setUsername(adminName);
-                admin.setName("Rafael Torquato");
+            final String username = entry.getKey();
+            User user = userDao.findByUsername(username);
+            if (user == null) {
+                user = new User();
+                user.getRoles().addAll(entry.getValue());
+                user.setUsername(username);
+                user.setName("Rafael Torquato");
                 final MessageDigest md = MessageDigest.getInstance("MD5");
                 md.update("123456".getBytes());
                 final byte[] digest = md.digest();
                 final String password = DatatypeConverter.printBase64Binary(digest);
-                admin.setPassword(password);
-                userDao.save(admin);
+                user.setPassword(password);
+                userDao.save(user);
             }
         }
-    }
-
-    @Override
-    public User findByUsername(String username) {
-        return userDao.findByUsername(username);
     }
 
 }

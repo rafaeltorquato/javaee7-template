@@ -7,13 +7,18 @@ import study.business.domain.model.address.Address;
 
 import javax.ejb.Local;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Local
 public interface AddressService {
 
-    Address newAddress(NewAddressCommand command);
+    void save(NewAddressCommand command);
+
+    void edit(EditAddressCommand command);
 
     void delete(@NotNull Long id);
+
+    List<Address> list();
 
 
     @ToString
@@ -21,6 +26,13 @@ public interface AddressService {
     @Setter
     class NewAddressCommand {
         private String value;
+    }
+
+    @ToString
+    @Getter
+    @Setter
+    class EditAddressCommand extends NewAddressCommand {
+        private Long id;
     }
 
     class AddressNotFoundException extends BusinessException {
@@ -33,3 +45,4 @@ public interface AddressService {
     }
 
 }
+

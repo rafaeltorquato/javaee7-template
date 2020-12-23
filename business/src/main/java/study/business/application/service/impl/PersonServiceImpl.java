@@ -23,7 +23,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     @RolesAllowed({"ADMINISTRATOR", "SAVE_PERSON"})
-    public Person save(NewPersonCommand command) {
+    public Person save(SavePersonCommand command) {
         final Person person = new Person();
         setPerson(command, person);
         this.personDao.save(person);
@@ -129,7 +129,7 @@ public class PersonServiceImpl implements PersonService {
         throw new PhoneNotFound();
     }
 
-    private void setPerson(NewPersonCommand command, Person person) {
+    private void setPerson(SavePersonCommand command, Person person) {
         person.setName(new PersonName(command.getName(), command.getSurname()));
         person.setBirthDate(command.getBirthDate());
         person.setEmail(command.getEmail());

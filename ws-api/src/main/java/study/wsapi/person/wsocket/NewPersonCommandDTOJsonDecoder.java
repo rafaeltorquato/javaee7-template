@@ -1,20 +1,20 @@
 package study.wsapi.person.wsocket;
 
 import com.google.gson.Gson;
-import study.facade.person.dto.NewPersonCommandDTO;
+import study.facade.person.dto.SavePersonCommandDTO;
 import study.wsapi.util.GsonProducer;
 
 import javax.websocket.DecodeException;
 import javax.websocket.Decoder;
 import javax.websocket.EndpointConfig;
 
-public class NewPersonCommandDTOJsonDecoder implements Decoder.Text<NewPersonCommandDTO> {
+public class NewPersonCommandDTOJsonDecoder implements Decoder.Text<SavePersonCommandDTO> {
 
     private Gson gson;
 
     @Override
-    public NewPersonCommandDTO decode(String s) throws DecodeException {
-        return gson.fromJson(s, NewPersonCommandDTO.class);
+    public SavePersonCommandDTO decode(String s) throws DecodeException {
+        return gson.fromJson(s, SavePersonCommandDTO.class);
     }
 
     @Override

@@ -2,6 +2,7 @@ package study.facade.person.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -14,6 +15,7 @@ import java.util.Set;
 
 @Getter
 @Setter
+@ToString
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class PersonDTO implements Serializable {

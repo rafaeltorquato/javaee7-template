@@ -3,8 +3,8 @@ package study.wsapi.person.jaxrs;
 
 import study.facade.person.PersonFacade;
 import study.facade.person.dto.EditPersonCommandDTO;
-import study.facade.person.dto.NewPersonCommandDTO;
 import study.facade.person.dto.PersonDTO;
+import study.facade.person.dto.SavePersonCommandDTO;
 
 import javax.annotation.security.DenyAll;
 import javax.ejb.EJB;
@@ -40,7 +40,7 @@ public class PersonJaxRsApi {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response save(NewPersonCommandDTO command) {
+    public Response save(SavePersonCommandDTO command) {
         PersonDTO save = personFacade.save(command);
         URI absolutePath = uriInfo.getAbsolutePath();
         URI newURI = absolutePath.resolve(save.getId().toString());

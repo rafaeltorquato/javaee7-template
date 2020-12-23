@@ -7,16 +7,16 @@
                    elementFormDefault="unqualified" targetNamespace="http://jaxws.person.web.study/" version="1.0">
             <xs:element name="list" type="tns:list"/>
             <xs:element name="listResponse" type="tns:listResponse"/>
-            <xs:element name="newPersonCommandDTO" type="tns:newPersonCommandDTO"/>
+            <xs:element name="savePersonCommandDTO" type="tns:savePersonCommandDTO"/>
             <xs:element name="personDTO" type="tns:personDTO"/>
             <xs:element name="save" type="tns:save"/>
             <xs:element name="saveResponse" type="tns:saveResponse"/>
             <xs:complexType name="save">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="arg0" type="tns:newPersonCommandDTO"/>
+                    <xs:element minOccurs="0" name="arg0" type="tns:savePersonCommandDTO"/>
                 </xs:sequence>
             </xs:complexType>
-            <xs:complexType name="newPersonCommandDTO">
+            <xs:complexType name="savePersonCommandDTO">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="name" type="xs:string"/>
                     <xs:element minOccurs="0" name="email" type="xs:string"/>

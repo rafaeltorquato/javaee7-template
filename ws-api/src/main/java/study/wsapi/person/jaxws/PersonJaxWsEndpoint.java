@@ -1,8 +1,8 @@
 package study.wsapi.person.jaxws;
 
 import study.facade.person.PersonFacade;
-import study.facade.person.dto.NewPersonCommandDTO;
 import study.facade.person.dto.PersonDTO;
+import study.facade.person.dto.SavePersonCommandDTO;
 
 import javax.ejb.EJB;
 import javax.jws.WebMethod;
@@ -16,7 +16,7 @@ public class PersonJaxWsEndpoint {
     private PersonFacade personFacade;
 
     @WebMethod
-    public PersonDTO save(NewPersonCommandDTO dto) {
+    public PersonDTO save(SavePersonCommandDTO dto) {
         return personFacade.save(dto);
     }
 

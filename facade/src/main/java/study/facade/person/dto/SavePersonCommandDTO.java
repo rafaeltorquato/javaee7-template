@@ -14,7 +14,7 @@ import java.util.Date;
 @Setter
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class NewPersonCommandDTO implements Serializable {
+public class SavePersonCommandDTO implements Serializable {
     @XmlElement
     private String name;
     @XmlElement

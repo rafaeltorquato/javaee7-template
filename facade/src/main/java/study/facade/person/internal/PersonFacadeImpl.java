@@ -35,7 +35,7 @@ public class PersonFacadeImpl implements PersonFacade {
     }
 
     @Override
-    public PersonDTO save(NewPersonCommandDTO command) {
+    public PersonDTO save(SavePersonCommandDTO command) {
         try {
             final Person person = personService.save(personMapper.fromDTO(command));
             return personMapper.toDTO(person);

@@ -3,11 +3,11 @@ package study.wsapi.person.wsocket;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import study.facade.person.PersonFacade;
-import study.facade.person.dto.NewPersonCommandDTO;
 import study.facade.person.dto.PersonDTO;
+import study.facade.person.dto.SavePersonCommandDTO;
 import study.wsapi.util.GlobalExceptionHandler;
 
-import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.RunAs;
 import javax.inject.Inject;
 import javax.websocket.EncodeException;
 import javax.websocket.OnMessage;
@@ -22,6 +22,7 @@ import java.util.List;
         encoders = {PersonDTOJsonEncoder.class, PersonDTOJsonArrayEncoder.class, ErrorMessageEncoder.class},
         decoders = {NewPersonCommandDTOJsonDecoder.class}
 )
+@RunAs("ADMINISTRATOR")
 public class AddPersonEndpoint {
 
     @Inject
@@ -34,8 +35,7 @@ public class AddPersonEndpoint {
     private Gson gson;
 
     @OnMessage
-    @RolesAllowed("ADMINISTRATOR")
-    public void onMessage(Session session, NewPersonCommandDTO message) {
+    public void onMessage(Session session, SavePersonCommandDTO message) {
         log.info("Message received!");
         try {
             PersonDTO saved = personFacade.save(message);

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PersonFacade {
     List<PersonDTO> list();
-    PersonDTO save(NewPersonCommandDTO command);
+    PersonDTO save(SavePersonCommandDTO command);
     void delete(Long id);
     PersonDTO edit(EditPersonCommandDTO command);
     PersonDTO saveRelationship(SaveRelationshipCommandDTO command);

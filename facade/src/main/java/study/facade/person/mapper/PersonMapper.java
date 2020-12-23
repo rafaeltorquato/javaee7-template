@@ -20,7 +20,7 @@ public interface PersonMapper {
 
     List<PersonDTO> toListDTO(List<Person> list);
 
-    PersonService.NewPersonCommand fromDTO(NewPersonCommandDTO dto);
+    PersonService.SavePersonCommand fromDTO(SavePersonCommandDTO dto);
 
     PersonService.EditPersonCommand fromDTO(EditPersonCommandDTO dto);
 

@@ -2,55 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hello</title>
+    <title>Java EE 7 Template Study</title>
 </head>
 <body>
-<h1>Hello!</h1>
-<script type="text/javascript">
-    let listWS;
-    let addWS;
+<h1>Java EE 7 Template Study</h1>
+<ul>
+    <li><a href="secure/person/list">Person Page</a></li>
+    <li><a href="secure/address/list">Address Page</a></li>
+</ul>
 
-    function connect() {
-        console.log("connect()");
-        listWS = new WebSocket("ws://localhost:8080/ws-api/socket/persons/list");
-        listWS.onmessage = onMessage;
-        listWS.onopen = function (event) {
-            console.log('Open: ' + JSON.stringify(event));
-        }
-        listWS.onerror = function (error) {
-            console.log('WebSocket Error: ' + error);
-        }
-        listWS.onclose = function (event) {
-            console.log('listWS Closed: ' + JSON.stringify(event));
-        }
-
-        addWS = new WebSocket("ws://localhost:8080/ws-api/socket/persons/add");
-        addWS.onopen = function (event) {
-            let count = 0;
-            setInterval(() => {
-                count++;
-                let obj = {};
-                obj.name = `Rafael${count}`
-                obj.email = `rafael${count}@gmail.com`;
-                obj.surname = "Torquato";
-                obj.birthDate = new Date();
-                console.log("Sending...")
-                addWS.send(JSON.stringify(obj));
-            }, 1000)
-        }
-        addWS.onmessage = onMessage;
-
-        addWS.onclose = function (event) {
-            console.log('addWS Closed: ' + JSON.stringify(event));
-        }
-
-    }
-
-    function onMessage(evt) {
-        console.log(evt.data);
-    }
-
-    window.addEventListener("load", connect, false);
-</script>
 </body>
 </html>

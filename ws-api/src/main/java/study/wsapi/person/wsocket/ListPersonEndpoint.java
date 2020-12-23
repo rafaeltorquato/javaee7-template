@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import study.facade.person.PersonFacade;
 import study.facade.person.dto.PersonDTO;
 
+import javax.annotation.security.RunAs;
 import javax.inject.Inject;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
@@ -17,6 +18,7 @@ import java.util.List;
         encoders = {PersonDTOJsonEncoder.class, PersonDTOJsonArrayEncoder.class},
         decoders = {NewPersonCommandDTOJsonDecoder.class}
 )
+@RunAs("ADMINISTRATOR")
 public class ListPersonEndpoint {
 
     @Inject

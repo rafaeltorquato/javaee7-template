@@ -17,12 +17,17 @@ public class PersonCountSummaryDaoJpa implements PersonCountSummaryDao {
     private EntityManager em;
 
     @Override
-    public PersonCountSummary save(PersonCountSummary personCountSummary) {
-        return em.merge(personCountSummary);
+    public PersonCountSummary save(PersonCountSummary summary) {
+        return em.merge(summary);
     }
 
     @Override
     public PersonCountSummary findById(Long id) {
         return em.find(PersonCountSummary.class, id);
+    }
+
+    @Override
+    public void delete(PersonCountSummary summary) {
+        em.remove(summary);
     }
 }

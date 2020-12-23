@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class EditPersonCommandDTO extends NewPersonCommandDTO {
+public class EditPersonCommandDTO extends SavePersonCommandDTO {
     private Long id;
 }

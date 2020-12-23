@@ -14,7 +14,7 @@ import java.util.List;
 @Local
 public interface PersonService {
 
-    Person save(NewPersonCommand command);
+    Person save(SavePersonCommand command);
 
     Person edit(EditPersonCommand command);
 
@@ -31,7 +31,7 @@ public interface PersonService {
     Person deletePhone(DeletePhoneCommand command);
 
     @ToString(of = {"name", "surname", "email"})
-    class NewPersonCommand {
+    class SavePersonCommand {
 
         private String name;
         private String surname;
@@ -72,7 +72,7 @@ public interface PersonService {
     }
 
     @ToString(of = {"id"}, callSuper = true)
-    class EditPersonCommand extends NewPersonCommand {
+    class EditPersonCommand extends SavePersonCommand {
         private Long id;
 
         public Long getId() {

@@ -21,10 +21,6 @@ import java.util.Set;
                         "   distinct p " +
                         "from " +
                         "   Person p " +
-                        "left join fetch p.phones " +
-                        "left join fetch p.relationships r " +
-                        "left join fetch r.target " +
-                        "left join fetch p.addresses " +
                         "order by " +
                         "   p.registerDateTime, " +
                         "   p.id"
@@ -33,6 +29,18 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@NamedEntityGraph(
+        name = "fetch-all-limited-relationship",
+        attributeNodes = {
+                @NamedAttributeNode("phones"),
+                @NamedAttributeNode(value = "relationships", subgraph = "relationship-target"),
+                @NamedAttributeNode("phones"),
+                @NamedAttributeNode("addresses")
+        },
+        subgraphs = {
+                @NamedSubgraph(name = "relationship-target", attributeNodes = {@NamedAttributeNode("target")}
+                )
+        })
 public class Person implements Serializable {
 
     public static final String LIST_ALL = "Person.listAll";

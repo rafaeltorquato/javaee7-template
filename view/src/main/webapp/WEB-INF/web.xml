@@ -63,6 +63,10 @@
         <location>/error-500.jsp</location>
     </error-page>
     <error-page>
+        <exception-type>study.view.exception.PageNotFoundException</exception-type>
+        <location>/error-404.jsp</location>
+    </error-page>
+    <error-page>
         <error-code>404</error-code>
         <location>/error-404.jsp</location>
     </error-page>

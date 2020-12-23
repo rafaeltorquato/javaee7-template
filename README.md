@@ -4,17 +4,11 @@
 
 A scaffold project to study Java EE 7:
 * Maven project with JDK 1.7 (as required by the specification)
-* Wildfly 8 Full Profile Runtime
 
 ### Requirements
+* Docker for running on docker
 
-#### Just Docker!
-
-* No need to install JDK
-* No need to install Maven
-* No need to install Wildfly (or any related application server)
-
-### Running
+### Running on docker
 
 ```
 $ ./build_and_run 
@@ -22,4 +16,16 @@ or
 PS ./build_and_run.ps1
 ```
 
-Open [http://localhost:8080/app](http://localhost:8080/app)
+### Running on a local machine with wildfly plugin
+
+```
+$ ./runLocal
+or for debugging on port 5005
+$ ./runLocal -Pdebug 
+or
+PS ./runLocal
+or for debugging on port 5005
+PS ./runLocal -Pdebug
+```
+
+Open [http://localhost:8080/view](http://localhost:8080/view)

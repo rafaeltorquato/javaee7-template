@@ -18,7 +18,7 @@ import java.io.IOException;
 @Slf4j
 @ServletSecurity(@HttpConstraint(rolesAllowed = {"ADMINISTRATOR", "DELETE_PERSON"}))
 @WebServlet(value = "/secure/person/delete")
-public class PersonDeleteServlet extends HttpServlet {
+public class DeletePersonServlet extends HttpServlet {
 
     @EJB
     private PersonFacade personFacade;

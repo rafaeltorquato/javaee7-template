@@ -20,9 +20,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Slf4j
-@ServletSecurity(@HttpConstraint(rolesAllowed = {"ADMINISTRATOR", "LIST_PERSON"}))
+@ServletSecurity(@HttpConstraint(rolesAllowed = {"ADMINISTRATOR", "EDIT_PERSON"}))
 @WebServlet(value = "/secure/person/edit")
-public class PersonEditServlet extends HttpServlet {
+public class EditPersonServlet extends HttpServlet {
+
+    private static final String JSP_PAGE = "/secure/person/edit.jsp";
 
     @EJB
     private PersonFacade personFacade;
@@ -35,7 +37,7 @@ public class PersonEditServlet extends HttpServlet {
         PersonDTO person = personFacade.get(Long.valueOf(id));
         if (person != null) {
             req.setAttribute("person", person);
-            req.getRequestDispatcher("/secure/person/edit.jsp")
+            req.getRequestDispatcher(JSP_PAGE)
                     .forward(req, resp);
         } else {
             throw new PageNotFoundException();
@@ -65,7 +67,7 @@ public class PersonEditServlet extends HttpServlet {
         }
         PersonDTO person  = personFacade.edit(command);
         req.setAttribute("person", person);
-        req.getRequestDispatcher("/secure/person/edit.jsp")
+        req.getRequestDispatcher(JSP_PAGE)
                 .forward(req, resp);
     }
 }

@@ -20,8 +20,10 @@ import java.util.List;
 
 @Slf4j
 @ServletSecurity(@HttpConstraint(rolesAllowed = {"ADMINISTRATOR", "LIST_PERSON"}))
-@WebServlet(value = "/secure/person/list", initParams = {@WebInitParam(name = "closed", value = "false")})
-public class PersonListServlet extends HttpServlet {
+@WebServlet(value = "/secure/person", initParams = {@WebInitParam(name = "closed", value = "false")})
+public class IndexPersonServlet extends HttpServlet {
+
+    private static final String JSP_PAGE = "/secure/person/index.jsp";
 
     private Boolean closed;
 
@@ -74,7 +76,7 @@ public class PersonListServlet extends HttpServlet {
         List<PersonDTO> persons = personFacade.list();
         log.info("{}", persons);
         req.setAttribute("list", persons);
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/secure/person/list.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(JSP_PAGE);
         if (requestDispatcher != null) {
 //            requestDispatcher.include(req, resp);
             requestDispatcher.forward(req, resp);

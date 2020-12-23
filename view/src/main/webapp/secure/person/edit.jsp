@@ -17,7 +17,7 @@
 <body>
 <h1>Editing ${person.name}&nbsp;${person.surname}</h1>
 
-<a href="/view/secure/person/list">Back</a>
+<a href="/view/secure/person">Back</a>
 
 <c:if test="${not empty errorMessage}">
     <c:out value="${errorMessage}"/>

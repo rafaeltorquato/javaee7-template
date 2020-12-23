@@ -7,8 +7,8 @@ import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
 @Slf4j
-@WebFilter("/servlet")
-public class ServletPathFilter implements Filter {
+@WebFilter("/secure")
+public class SecureFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

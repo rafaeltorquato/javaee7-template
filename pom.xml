@@ -26,7 +26,7 @@
         <maven.test.skip>true</maven.test.skip>
         <javaee-api.version>7.0</javaee-api.version>
         <hibernate.version>4.3.7.Final</hibernate.version>
-        <wildfly-maven-plugin.version>2.0.2.Final</wildfly-maven-plugin.version>
+        <wildfly-maven-plugin.version>2.1.0.Beta1</wildfly-maven-plugin.version>
 
         <mapstruct.version>1.4.1.Final</mapstruct.version>
         <lombok.version>1.18.12</lombok.version>

@@ -6,7 +6,6 @@ import study.facade.person.PersonFacade;
 import study.view.exception.PageNotFoundException;
 
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.HttpConstraint;
 import javax.servlet.annotation.ServletSecurity;

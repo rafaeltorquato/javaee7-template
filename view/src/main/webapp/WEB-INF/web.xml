@@ -55,10 +55,6 @@
     </security-constraint>
 
     <error-page>
-        <exception-type>study.facade.exception.FacadeBusinessException</exception-type>
-        <location>/error-business.jsp</location>
-    </error-page>
-    <error-page>
         <error-code>500</error-code>
         <location>/error-500.jsp</location>
     </error-page>
@@ -69,6 +65,14 @@
     <error-page>
         <error-code>404</error-code>
         <location>/error-404.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>study.facade.exception.FacadeBusinessException</exception-type>
+        <location>/error-400.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>javax.validation.ConstraintViolationException</exception-type>
+        <location>/error-400.jsp</location>
     </error-page>
 
 </web-app>

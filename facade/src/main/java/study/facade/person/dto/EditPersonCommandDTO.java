@@ -7,4 +7,5 @@ import lombok.Setter;
 @Setter
 public class EditPersonCommandDTO extends SavePersonCommandDTO {
     private Long id;
+    private Integer version;
 }

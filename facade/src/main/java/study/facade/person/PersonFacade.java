@@ -13,4 +13,5 @@ public interface PersonFacade {
     PersonDTO deleteRelationship(DeleteRelationshipCommandDTO command);
     PersonDTO savePhone(SavePhoneCommandDTO command);
     PersonDTO deletePhone(DeletePhoneCommandDTO command);
+    PersonDTO get(Long id);
 }

@@ -32,7 +32,7 @@
     </style>
 </head>
 <body>
-<h1>Person List</h1>
+<h1>Person List ${[1,2,3].stream().findFirst().get()}/${!empty param.Add}</h1>
 
 <c:choose>
     <c:when test="${not empty list}">

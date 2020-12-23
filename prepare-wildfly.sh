@@ -7,8 +7,8 @@ cd $JBOSS_HOME/bin
 sleep 10
 
 #Logging
-./jboss-cli.sh --connect --command="/subsystem=logging/root-logger=ROOT:write-attribute(name=\"level\", value=\"DEBUG\")"
-./jboss-cli.sh --connect --command="/subsystem=logging/console-handler=CONSOLE:write-attribute(name=\"level\", value=\"DEBUG\")"
+#./jboss-cli.sh --connect --command="/subsystem=logging/root-logger=ROOT:write-attribute(name=\"level\", value=\"DEBUG\")"
+#./jboss-cli.sh --connect --command="/subsystem=logging/console-handler=CONSOLE:write-attribute(name=\"level\", value=\"DEBUG\")"
 #Add security domain
 ./jboss-cli.sh --connect --command="/subsystem=security/security-domain=application-security:add"
 ./jboss-cli.sh --connect --command="/subsystem=security/security-domain=application-security/authentication=classic:add(login-modules=[{code=\"Database\",flag=\"required\",module-options=[dsJndiName=>\"java:jboss/datasources/ExampleDS\",principalsQuery=>\"select a.password from AuthUser a where a.username=?\",rolesQuery=>\"select distinct u.roles, 'Roles' from (select au.username, aur.roles from AuthUser au inner join AuthUserRoles aur on aur.User_id = au.id union select au.username, agr.roles from AuthUser au inner join UserAuthGroup uag on uag.User_id = au.id inner join AuthGroup ag on uag.groups_id = au.id inner join AuthGroupRoles agr on agr.Group_id = ag.id) u where u.username = ?\",hashAlgorithm=\"md5\",hashEncoding=\"base64\"]}])"

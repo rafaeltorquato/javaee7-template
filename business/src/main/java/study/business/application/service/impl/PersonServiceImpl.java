@@ -36,6 +36,7 @@ public class PersonServiceImpl implements PersonService {
     public Person edit(EditPersonCommand command) {
         final Person person = personDao.findById(command.getId());
         if (person == null) throw new PersonNotFoundException();
+        person.setVersion(command.getVersion());
 
         setPerson(command, person);
         return person;
@@ -127,6 +128,12 @@ public class PersonServiceImpl implements PersonService {
         }
 
         throw new PhoneNotFound();
+    }
+
+    @Override
+    @RolesAllowed({"ADMINISTRATOR", "EDIT_PERSON"})
+    public Person get(Long id) {
+        return personDao.findById(id);
     }
 
     private void setPerson(SavePersonCommand command, Person person) {

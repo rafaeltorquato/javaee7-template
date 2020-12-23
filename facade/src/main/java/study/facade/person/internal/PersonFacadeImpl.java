@@ -103,4 +103,14 @@ public class PersonFacadeImpl implements PersonFacade {
         }
     }
 
+    @Override
+    public PersonDTO get(Long id) {
+        try {
+            final Person person = personService.get(id);
+            return personMapper.toDTO(person);
+        } catch (BusinessException exception) {
+            throw new FacadeBusinessException(exception);
+        }
+    }
+
 }

@@ -30,6 +30,8 @@ public interface PersonService {
 
     Person deletePhone(DeletePhoneCommand command);
 
+    Person get(Long id);
+
     @ToString(of = {"name", "surname", "email"})
     class SavePersonCommand {
 
@@ -71,17 +73,12 @@ public interface PersonService {
         }
     }
 
-    @ToString(of = {"id"}, callSuper = true)
+    @Getter
+    @Setter
+    @ToString(callSuper = true)
     class EditPersonCommand extends SavePersonCommand {
         private Long id;
-
-        public Long getId() {
-            return id;
-        }
-
-        public void setId(Long id) {
-            this.id = id;
-        }
+        private Integer version;
     }
 
     @Getter

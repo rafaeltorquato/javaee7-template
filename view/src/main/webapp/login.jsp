@@ -15,9 +15,9 @@
 <form method="post" action="j_security_check">
     <fieldset>
         <label for="username">Username:</label>
-        <input id="username" name="j_username" type="text">
+        <input id="username" name="j_username" type="text" />
         <label for="password">Password:</label>
-        <input id="password" name="j_password" type="password">
+        <input id="password" name="j_password" type="password" />
     </fieldset>
     <input type="submit" value="Enter">&nbsp;
     <input type="reset" value="Reset">

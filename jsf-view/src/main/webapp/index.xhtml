@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: torquato
+  Date: 12/24/20
+  Time: 4:34 PM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+>
+<h:body>
+ <ui:composition template="template.xhtml">
+     <ui:define name="content">
+         <h:form>
+             <ul>
+                 <li>
+                     <h:commandLink action="#{indexController.goToPerson}" value="Manage Person"/>
+                 </li>
+                 <li>
+                     <h:commandLink action="#{indexController.goToAddress}" value="Manage Address"/>
+                 </li>
+             </ul>
+         </h:form>
+     </ui:define>
+ </ui:composition>
+
+</h:body>
+
+</html>

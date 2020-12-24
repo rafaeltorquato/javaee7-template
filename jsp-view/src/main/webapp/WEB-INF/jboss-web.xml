@@ -1,0 +1,3 @@
+<jboss-web>
+    <security-domain>application-security</security-domain>
+</jboss-web>

@@ -28,4 +28,12 @@ or for debugging on port 5005
 PS ./runLocal -Pdebug
 ```
 
-Open [http://localhost:8080/view](http://localhost:8080/view)
+Open [http://localhost:8080/jsp-view](http://localhost:8080/jsp-view)
+
+Open [http://localhost:8080/jsf-view](http://localhost:8080/jsf-view)
+
+
+### Details
+* When run jsf-view app an error appear: 
+  SEVERE [javax.enterprise.resource.webcontainer.jsf.flow] (MSC service thread 1-1) Unable to obtain CDI 1.1 utilities for Mojarra
+  (It can be ignored https://access.redhat.com/solutions/3906401)

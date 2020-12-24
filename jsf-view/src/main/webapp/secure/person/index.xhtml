@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: torquato
+  Date: 12/24/20
+  Time: 5:47 PM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+
+<h:body>
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{personController.init}"/>
+    </f:metadata>
+    <ui:composition template="/template.xhtml">
+        <ui:define name="content">
+            <h2>Person List</h2>
+            <h3>Editing #{personController.editedPerson.name}&nbsp;#{personController.editedPerson.surname}</h3>
+            <h:form>
+
+                <h:dataTable value="#{personController.list}" var="person">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                        #{person.id}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Name</f:facet>
+                        #{person.name}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Surname</f:facet>
+                        #{person.surname}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">BirthDate</f:facet>
+                        <h:outputText value="#{person.birthDate}">
+                            <f:convertDateTime />
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Action</f:facet>
+                        <h:commandLink action="#{personController.edit(person)}" value="Edit" />&nbsp;
+                        <h:commandLink action="#{personController.delete(person)}" value="Delete" />
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>

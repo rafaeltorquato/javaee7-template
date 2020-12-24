@@ -33,7 +33,13 @@
         </dependency>
         <dependency>
             <groupId>study</groupId>
-            <artifactId>view</artifactId>
+            <artifactId>jsp-view</artifactId>
+            <type>war</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>study</groupId>
+            <artifactId>jsf-view</artifactId>
             <type>war</type>
             <scope>compile</scope>
         </dependency>

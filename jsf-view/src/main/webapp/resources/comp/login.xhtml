@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>This content will not be displayed</title>
+</h:head>
+<h:body>
+    <composite:interface>
+        <composite:attribute name="usernameLabel" required="true"/>
+        <composite:attribute name="passwordLabel" required="true"/>
+        <composite:attribute name="submitButtonLabel" required="true"/>
+    </composite:interface>
+
+    <composite:implementation>
+
+        <form method="post" action="j_security_check">
+            <fieldset>
+                <legend>Login</legend>
+                <label for="username">#{cc.attrs.usernameLabel}</label>
+                <input id="username" name="j_username" type="text" /><br/>
+                <label for="password">#{cc.attrs.passwordLabel}</label>
+                <input id="password" name="j_password" type="password" />
+            </fieldset>
+            <input type="submit" value="#{cc.attrs.submitButtonLabel}"/>&nbsp;
+        </form>
+<!--        <h:form id="formLogin" prependId="false"-->
+<!--                onsubmit="document.getElementById('formLogin').action = 'j_security_check';">-->
+<!--            <h:panelGrid columns="2">-->
+
+<!--                <h:outputLabel for="j_username" value="#{cc.attrs.usernameLabel}"/>-->
+<!--                <h:inputText id="j_username" required="true" />-->
+
+<!--                <h:outputLabel for="j_password" value="#{cc.attrs.passwordLabel}"/>-->
+<!--                <h:inputSecret id="j_password" required="true" />-->
+
+<!--                <f:facet name="footer">-->
+<!--                    <h:commandButton value="#{cc.attrs.submitButtonLabel}" type="submit"/>-->
+<!--                </f:facet>-->
+<!--            </h:panelGrid>-->
+<!--        </h:form>-->
+    </composite:implementation>
+</h:body>
+</html>

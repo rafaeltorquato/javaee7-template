@@ -9,7 +9,9 @@ import javax.enterprise.inject.Produces;
 @ApplicationScoped
 public class GsonProducer {
 
-    private static Gson GSON;
+    private static final Gson GSON = new GsonBuilder()
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+            .create();;
 
     @Produces
     public Gson produces() {
@@ -17,15 +19,6 @@ public class GsonProducer {
     }
 
     public static Gson create() {
-        if (GSON == null) {
-            synchronized (GsonProducer.class) {
-                if (GSON == null) {
-                    GSON = new GsonBuilder()
-                            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-                            .create();
-                }
-            }
-        }
         return GSON;
     }
 }

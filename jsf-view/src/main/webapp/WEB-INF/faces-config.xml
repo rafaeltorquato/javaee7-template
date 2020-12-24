@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+        xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
+        version="2.3">
+
+
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{indexController.goToPerson}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/secure/person/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/secure/person/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>edit</from-outcome>
+            <to-view-id>/secure/person/edit.editModal.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+</faces-config>

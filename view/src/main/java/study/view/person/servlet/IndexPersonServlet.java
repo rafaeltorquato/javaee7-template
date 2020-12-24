@@ -76,11 +76,8 @@ public class IndexPersonServlet extends HttpServlet {
         List<PersonDTO> persons = personFacade.list();
         log.info("{}", persons);
         req.setAttribute("list", persons);
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher(JSP_PAGE);
-        if (requestDispatcher != null) {
-//            requestDispatcher.include(req, resp);
-            requestDispatcher.forward(req, resp);
-        }
+        req.getRequestDispatcher(JSP_PAGE).forward(req, resp);
+
     }
 
 }

@@ -41,13 +41,10 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Person Secure Area JSP(X)/JSF/HTML</web-resource-name>
-            <url-pattern>/secure/person/*</url-pattern>
+            <url-pattern>/secure/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>ADMINISTRATOR</role-name>
-            <role-name>SAVE_PERSON</role-name>
-            <role-name>DELETE_PERSON</role-name>
-            <role-name>LIST_PERSON</role-name>
+            <role-name>AUTHENTICATED</role-name>
         </auth-constraint>
         <user-data-constraint>
             <transport-guarantee>NONE</transport-guarantee>

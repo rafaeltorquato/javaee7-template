@@ -35,13 +35,10 @@ public class EditPersonServlet extends HttpServlet {
         if (id == null || id.isEmpty()) throw new PageNotFoundException();
 
         PersonDTO person = personFacade.get(Long.valueOf(id));
-        if (person != null) {
-            req.setAttribute("person", person);
-            req.getRequestDispatcher(JSP_PAGE)
-                    .forward(req, resp);
-        } else {
-            throw new PageNotFoundException();
-        }
+        if (person == null) throw new PageNotFoundException();
+
+        req.setAttribute("person", person);
+        req.getRequestDispatcher(JSP_PAGE).forward(req, resp);
     }
 
     @Override
@@ -57,13 +54,10 @@ public class EditPersonServlet extends HttpServlet {
         command.setVersion(Integer.valueOf(req.getParameter("version")));
 
         String birthDate = req.getParameter("birthDate");
-        if(birthDate != null) {
-            log.info("birthDate: " + birthDate);
-            try {
-                Date parse = new SimpleDateFormat("yyyy-MM-dd").parse(birthDate);
-                command.setBirthDate(parse);
-            } catch (ParseException ignore) {
-            }
+        try {
+            Date parse = new SimpleDateFormat("yyyy-MM-dd").parse(birthDate);
+            command.setBirthDate(parse);
+        } catch (ParseException ignore) {
         }
         PersonDTO person  = personFacade.edit(command);
         req.setAttribute("person", person);

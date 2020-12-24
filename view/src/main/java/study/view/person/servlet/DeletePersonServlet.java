@@ -33,9 +33,10 @@ public class DeletePersonServlet extends HttpServlet {
             personFacade.delete(Long.valueOf(id));
             resp.sendRedirect(req.getHeader("Referer"));
         } catch (FacadeBusinessException e) {
-            if(e.getBusinessExceptionClassName().contains("PersonNotFoundException")) {
+            if (e.getBusinessExceptionClassName().contains("PersonNotFoundException")) {
                 throw new PageNotFoundException();
             }
+            throw e;
         }
     }
 

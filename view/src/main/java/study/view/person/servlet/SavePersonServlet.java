@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Slf4j
-@ServletSecurity(@HttpConstraint(rolesAllowed = {"ADMINISTRATOR", "DELETE_PERSON"}))
+@ServletSecurity(@HttpConstraint(rolesAllowed = {"ADMINISTRATOR", "SAVE_PERSON"}))
 @WebServlet(value = "/secure/person/save")
 public class SavePersonServlet extends HttpServlet {
 
@@ -43,12 +43,10 @@ public class SavePersonServlet extends HttpServlet {
         command.setEmail(req.getParameter("email"));
 
         String birthDate = req.getParameter("birthDate");
-        if(birthDate != null) {
-            try {
-                Date parse = new SimpleDateFormat("yyyy-MM-dd").parse(birthDate);
-                command.setBirthDate(parse);
-            } catch (ParseException ignore) {
-            }
+        try {
+            Date parse = new SimpleDateFormat("yyyy-MM-dd").parse(birthDate);
+            command.setBirthDate(parse);
+        } catch (ParseException ignore) {
         }
         PersonDTO person  = personFacade.save(command);
         req.setAttribute("person", person);

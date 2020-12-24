@@ -33,7 +33,7 @@ public class SendEmailConsumer implements MessageListener {
     public void onMessage(Message message) {
         try {
             final EmailEvent emailEvent = message.getBody(EmailEvent.class);
-            emailService.send(emailEvent.getEmail(), emailEvent.getSubject(), emailEvent.getMessage());
+            log.info("Receive an email to sent: {}", emailEvent);
         } catch (JMSException e) {
             log.error(e.getMessage(), e);
             mdc.setRollbackOnly();

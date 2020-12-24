@@ -32,22 +32,22 @@ public class PersonEventsObserver {
         if(summary != null) {
             personCountSummaryDao.delete(summary);
         }
-//        emailService.send(
-//                person.getEmail(),
-//                "Goodbye",
-//                "You was deleted!"
-//        );
+        emailService.queue(
+                person.getEmail(),
+                "Goodbye",
+                "You was deleted!"
+        );
     }
 
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void whenSaved(@Observes(during = TransactionPhase.AFTER_SUCCESS) PersonSavedEvent event) {
         final Person person = event.getPerson();
-        log.info("Sending well come e-mail to {}", person.getEmail());
-//        emailService.send(
-//                person.getEmail(),
-//                "Well come ",
-//                "You was registered!"
-//        );
+        log.info("Sending welcome e-mail to {}", person.getEmail());
+        emailService.queue(
+                person.getEmail(),
+                "Welcome",
+                "You was registered!"
+        );
     }
 
 }

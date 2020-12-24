@@ -1,6 +1,5 @@
 package study.components.interceptor;
 
-
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Priority;
@@ -18,11 +17,15 @@ public class LogInterceptor {
     public Object aroundInvoke(InvocationContext invocationContext) throws Exception {
         String simpleName = invocationContext.getTarget().getClass().getSimpleName();
         String parameters = getParameters(invocationContext);
-
-        log.info("Executing  method {}::{}({})", simpleName, invocationContext.getMethod().getName(), parameters);
-        Object result = invocationContext.proceed();
-        log.info("Method {}::{}({}) executed!", simpleName, invocationContext.getMethod().getName(), parameters);
-        return result;
+        String methodCall = String.format("%s::%s(%s)",
+                simpleName,
+                invocationContext.getMethod().getName(),
+                parameters
+        );
+        log.info("Executing method {}", methodCall);
+        Object returned = invocationContext.proceed();
+        log.info("Executed method {} with return: {}", methodCall, returned);
+        return returned;
     }
 
     private String getParameters(InvocationContext invocationContext) {

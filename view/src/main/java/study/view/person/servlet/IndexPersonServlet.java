@@ -5,7 +5,6 @@ import study.facade.person.PersonFacade;
 import study.facade.person.dto.PersonDTO;
 
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.HttpConstraint;

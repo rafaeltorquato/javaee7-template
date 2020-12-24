@@ -8,13 +8,10 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
-import java.util.logging.Logger;
 
 @Slf4j
 @ApplicationScoped
 public class DateTimeFactoryProducer {
-
-    private static final Logger logger = Logger.getLogger(DateTimeFactoryProducer.class.getSimpleName());
 
     @Inject
     private DateTimeFactoryImpl dateTimeFactory;

@@ -24,7 +24,6 @@ import java.util.concurrent.Future;
 @Slf4j
 @Logged
 @Stateless
-@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class EmailServiceImpl implements EmailService {
 
     @Resource(name = "mail/MailSession")
@@ -37,12 +36,14 @@ public class EmailServiceImpl implements EmailService {
     private ManagedExecutorService managedExecutorService;
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public Boolean send(String email, String subject, String message) {
         return execute(email, subject, message);
     }
 
     @Override
     @Asynchronous
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public Future<Boolean> sendAsync(String email, String subject, String message) {
         return new AsyncResult<>(execute(email, subject, message));
     }

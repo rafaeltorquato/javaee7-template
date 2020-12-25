@@ -4,17 +4,17 @@ import lombok.Getter;
 import lombok.Setter;
 import study.facade.person.PersonFacade;
 import study.facade.person.dto.PersonDTO;
+import study.jsfview.controller.BaseController;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
 @ViewScoped
 @ManagedBean
-public class PersonController implements Serializable {
+public class PersonController extends BaseController {
 
     @EJB
     private PersonFacade personFacade;
@@ -27,8 +27,8 @@ public class PersonController implements Serializable {
     private PersonDTO editedPerson;
 
     public void init() {
-        if(list.isEmpty()) {
-            list = personFacade.list();
+        if(this.list.isEmpty()) {
+            this.list = personFacade.list();
         }
     }
 
@@ -37,11 +37,12 @@ public class PersonController implements Serializable {
     }
 
     public void delete(PersonDTO person) {
-        personFacade.delete(person.getId());
-        list.remove(person);
-        if(this.editedPerson != null && this.editedPerson.equals(person)) {
+        this.personFacade.delete(person.getId());
+        this.list.remove(person);
+        if(person.equals(this.editedPerson)) {
             this.editedPerson = null;
         }
+        addSuccessMessage("view_person_index_person_deleted");
     }
 
 }

@@ -5,6 +5,16 @@
         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
         version="2.3">
 
+    <application>
+        <resource-bundle>
+            <base-name>i18n.messages</base-name>
+            <var>i18n</var>
+        </resource-bundle>
+        <locale-config>
+            <default-locale>en</default-locale>
+            <supported-locale>pt_BR</supported-locale>
+        </locale-config>
+    </application>
 
     <navigation-rule>
         <from-view-id>/index.xhtml</from-view-id>
@@ -19,7 +29,7 @@
         <from-view-id>/secure/person/index.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>edit</from-outcome>
-            <to-view-id>/secure/person/edit.editModal.xhtml</to-view-id>
+            <to-view-id>/secure/person/editModal.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 

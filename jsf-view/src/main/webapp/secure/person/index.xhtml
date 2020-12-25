@@ -13,6 +13,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:comp="http://xmlns.jcp.org/jsf/composite/comp"
 >
 
 <h:body>
@@ -24,6 +25,7 @@
             <h2>Person List</h2>
             <h3>Editing #{personController.editedPerson.name}&nbsp;#{personController.editedPerson.surname}</h3>
             <h:form>
+                <comp:appMessages messagesId="formMessages" />
 
                 <h:dataTable value="#{personController.list}" var="person">
                     <h:column>
@@ -43,13 +45,15 @@
                     <h:column>
                         <f:facet name="header">BirthDate</f:facet>
                         <h:outputText value="#{person.birthDate}">
-                            <f:convertDateTime />
+                            <f:convertDateTime/>
                         </h:outputText>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Action</f:facet>
-                        <h:commandLink action="#{personController.edit(person)}" value="Edit" />&nbsp;
-                        <h:commandLink action="#{personController.delete(person)}" value="Delete" />
+                        <h:commandLink action="#{personController.edit(person)}" value="Edit"/>&nbsp;
+                        <h:commandLink action="#{personController.delete(person)}" value="Delete">
+                            <f:ajax render="@form globalMessages" execute="@this"/>
+                        </h:commandLink>
                     </h:column>
                 </h:dataTable>
             </h:form>

@@ -9,6 +9,8 @@ import study.components.interceptor.Logged;
 import javax.annotation.Resource;
 import javax.ejb.*;
 import javax.enterprise.concurrent.ManagedExecutorService;
+import javax.enterprise.concurrent.ManagedExecutors;
+import javax.enterprise.concurrent.ManagedTaskListener;
 import javax.inject.Inject;
 import javax.jms.JMSContext;
 import javax.jms.Queue;
@@ -54,7 +56,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     private Boolean execute(final String email, final String subject, final String message) {
-        final Future<Boolean> future = managedExecutorService.submit(new Callable<Boolean>() {
+        Callable<Boolean> task = ManagedExecutors.managedTask(new Callable<Boolean>() {
             @Override
             public Boolean call() {
                 try {
@@ -74,7 +76,28 @@ public class EmailServiceImpl implements EmailService {
                     return false;
                 }
             }
+        }, new ManagedTaskListener() {
+            @Override
+            public void taskSubmitted(Future<?> future, ManagedExecutorService executor, Object task) {
+
+            }
+
+            @Override
+            public void taskAborted(Future<?> future, ManagedExecutorService executor, Object task, Throwable exception) {
+
+            }
+
+            @Override
+            public void taskDone(Future<?> future, ManagedExecutorService executor, Object task, Throwable exception) {
+
+            }
+
+            @Override
+            public void taskStarting(Future<?> future, ManagedExecutorService executor, Object task) {
+
+            }
         });
+        final Future<Boolean> future = managedExecutorService.submit(task);
         try {
             return future.get();
         } catch (Exception e) {

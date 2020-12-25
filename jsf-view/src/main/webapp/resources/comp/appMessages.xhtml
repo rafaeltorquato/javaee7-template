@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: torquato
+  Date: 12/25/20
+  Time: 11:00 AM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://java.sun.com/jsf/html">
+<composite:interface>
+    <composite:attribute name="messagesId" required="true"/>
+    <composite:attribute name="for" required="false"/>
+</composite:interface>
+<composite:implementation>
+    <h:messages
+            id="#{cc.attrs.messagesId}"
+            errorStyle="color: #d20005;font-family: 'New Century Schoolbook', serif;font-style: oblique;"
+            infoStyle="color: #006600;font-family: 'New Century Schoolbook', serif;font-style: oblique;"
+            warnStyle="color: #E4CD05;font-family: 'New Century Schoolbook', serif;font-style: oblique;"
+    />
+</composite:implementation>
+</html>

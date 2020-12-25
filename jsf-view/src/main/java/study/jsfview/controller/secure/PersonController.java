@@ -27,7 +27,7 @@ public class PersonController extends BaseController {
     private PersonDTO editedPerson;
 
     public void init() {
-        if(this.list.isEmpty()) {
+        if (this.list.isEmpty()) {
             this.list = personFacade.list();
         }
     }
@@ -39,10 +39,10 @@ public class PersonController extends BaseController {
     public void delete(PersonDTO person) {
         this.personFacade.delete(person.getId());
         this.list.remove(person);
-        if(person.equals(this.editedPerson)) {
+        if (person.equals(this.editedPerson)) {
             this.editedPerson = null;
         }
-        addSuccessMessage("view_person_index_person_deleted");
+        addSuccessMessage("view_person_index_person_deleted", person.getName());
     }
 
 }

@@ -3,6 +3,7 @@ package study.jsfview.controller;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 public abstract class BaseController implements Serializable {
@@ -18,16 +19,20 @@ public abstract class BaseController implements Serializable {
         return FacesContext.getCurrentInstance();
     }
 
-    public void addSuccessMessage(String i18nKey) {
-
-        getContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, i18n.getString(i18nKey), null));
+    public void addSuccessMessage(String i18nKey, Object... parameters) {
+        addMessage(i18nKey, parameters, FacesMessage.SEVERITY_INFO);
     }
 
-    public void addErrorMessage(String i18nKey) {
-        getContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, i18n.getString(i18nKey), null));
+    public void addErrorMessage(String i18nKey, Object... parameters) {
+        addMessage(i18nKey, parameters, FacesMessage.SEVERITY_ERROR);
     }
 
-    public void addWarningMessage(String i18nKey) {
-        getContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, i18n.getString(i18nKey), null));
+    public void addWarningMessage(String i18nKey, Object... parameters) {
+        addMessage(i18nKey, parameters, FacesMessage.SEVERITY_WARN);
+    }
+
+    private void addMessage(String i18nKey, Object[] parameters, FacesMessage.Severity severityInfo) {
+        final String message = MessageFormat.format(i18n.getString(i18nKey), parameters);
+        getContext().addMessage(null, new FacesMessage(severityInfo, message, null));
     }
 }

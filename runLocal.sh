@@ -1,4 +1,4 @@
 #!/bin/bash
 
-mvn clean package -T2C
+mvn clean install -T2C
 mvn wildfly:run -f ear/pom.xml $1
